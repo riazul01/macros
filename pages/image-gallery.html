@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<!-- 
+    Project name: Image Gallary
+    Author: Md. Riazul Islam
+    Author URI: https://github.com/riazul01
+-------------------------------------------->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+    <!-- icons -->
+    <link rel="stylesheet" href="../icon.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Acme', sans-serif;
+            box-sizing: border-box;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #fff;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4ab11b;
+        }
+
+        body {
+            position: relative;
+            background: #111;
+            overflow-x: hidden;
+        }
+
+        .container {
+            margin: 2rem 0;
+            width: 100%;
+            height: auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .title h1 {
+            color: #fff;
+            font-size: 2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .wrapper {
+            margin: 1.4rem 0;
+            max-width: 1080px;
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .filter-menu {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+
+        .filter-menu li {
+            margin: 0.4rem;
+            padding: 0.4rem 1.2rem;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border: 2px solid #fff;
+            border-radius: 0.2rem;
+            transition: all 0.4s ease;
+        }
+
+        .filter-menu li:hover,
+        .filter-menu li.active-menu {
+            background: #4ab11b;
+            border: 2px solid #4ab11b;
+        }
+
+        .filter-items {
+            margin-top: 1.6rem;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-content {
+            position: relative;
+            margin: 0.3rem;
+            width: 350px;
+            height: 250px;
+            cursor: pointer;
+            border-radius: 0.4rem;
+            overflow: hidden;
+        }
+
+        /* active or delete contents */
+        .filter-content.deleteContents {
+            display: none;
+        }
+
+        .filter-content.activeContents {
+            animation: anim 0.3s ease-out forwards;
+        }
+
+        @keyframes anim {
+            0% {
+                transform: scale(0.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .filter-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 0.4rem;
+        }
+
+        .filter-content::before {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 0.3rem;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: scale(1);
+            transition: all 0.4s ease;
+        }
+
+        .filter-items .filter-content:hover::before {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: scale(0.9);
+        }
+
+        .filter-content p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            color: #fff;
+            font-size: 1.6rem;
+            transition: transform 0.4s ease;
+            z-index: 1;
+        }
+
+        .filter-content:hover p {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+
+
+        /* lightbox area */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: scale(1.4);
+            transition: all 0.4s ease;
+            z-index: 99999;
+        }
+
+        .lightbox.show-lightbox {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: scale(1);
+        }
+
+        .lightbox-wrapper {
+            height: 100%;
+            width: 100%;
+        }
+
+        .lightbox-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0 0.4rem;
+            width: 100%;
+            height: 500px;
+            max-width: 700px;
+            box-sizing: border-box;
+            z-index: 999;
+        }
+
+        .lightbox-header {
+            padding: 0.4rem 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .lightbox-header p {
+            color: #4ab11b;
+            font-size: 1.2rem;
+        }
+
+        .lightbox-header p span {
+            color: #fff;
+        }
+
+        .lightbox-close-btn {
+            height: 2.4rem;
+            width: 2.4rem;
+            display: grid;
+            cursor: pointer;
+            place-items: center;
+        }
+
+        #close-lightbox {
+            position: relative;
+            height: 2rem;
+            width: 2rem;
+        }
+
+        #close-lightbox::before {
+            position: absolute;
+            content: '';
+            top: 0.8rem;
+            right: 0;
+            height: 3px;
+            width: 20px;
+            background: #fff;
+            border-radius: 0.1rem;
+            transform: rotate(-45deg);
+            transition: all 0.4s ease;
+        }
+
+        #close-lightbox::after {
+            position: absolute;
+            content: '';
+            top: 0.8rem;
+            right: 0;
+            height: 3px;
+            width: 20px;
+            background: #fff;
+            border-radius: 0.1rem;
+            transform: rotate(45deg);
+            transition: all 0.4s ease;
+        }
+
+        #close-lightbox:hover::before,
+        #close-lightbox:hover::after {
+            background: orangered;
+        }
+
+        .image-wrapper {
+            height: 90%;
+            width: 100%;
+        }
+
+        .image-wrapper img {
+            height: calc(100% - 0.8rem);
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .lightbox-arrow span {
+            color: #fff;
+            font-size: 4rem;
+            pointer-events: auto;
+            cursor: pointer;
+            text-shadow: 0.1rem 0.1rem 0.8rem #333;
+        }
+
+        #left-arrow {
+            padding: 2% 4%;
+        }
+
+        #right-arrow {
+            padding: 2% 4%;
+        }
+
+        /* responsive area */
+        @media screen and (max-width: 1080px) {
+            .filter-menu,
+            .filter-items {
+                justify-content: center;
+            }
+        }
+
+        @media screen and (max-width: 540px) {
+            .lightbox-content {
+                height: 380px;
+            }
+        }
+    </style>
+
+    <title>Image Gallary</title>
+</head>
+<body>
+    <!-- gallery -->
+    <div class="container">
+        <div class="title">
+            <h1>Image Gallery</h1>
+        </div>
+
+        <div class="wrapper">
+            <ul class="filter-menu">
+                <li data-list="all" class="active-menu">All</li>
+                <li data-list="web-design">Web Design</li>
+                <li data-list="photography">Photography</li>
+                <li data-list="illustration">Illustration</li>
+            </ul>
+
+            <div class="filter-items">
+                <div class="filter-content" data-item="web-design">
+                    <img src="../images/gallery/web1.jpg" alt="image1">
+                    <p>View Details</p>
+                </div>
+
+                <div class="filter-content" data-item="web-design">
+                    <img src="../images/gallery/web2.jpg" alt="image2">
+                    <p>View Details</p>
+                </div>
+
+                <div class="filter-content" data-item="photography">
+                    <img src="../images/gallery/photo2.jpg" alt="image5">
+                    <p>View Details</p>
+                </div>
+
+                <div class="filter-content" data-item="illustration">
+                    <img src="../images/gallery/ill1.jpg" alt="image6">
+                    <p>View Details</p>
+                </div>
+
+                <div class="filter-content" data-item="illustration">
+                    <img src="../images/gallery/ill2.jpg" alt="image7">
+                    <p>View Details</p>
+                </div>
+
+                <div class="filter-content" data-item="web-design">
+                    <img src="../images/gallery/web3.jpg" alt="image3">
+                    <p>View Details</p>
+                </div>
+
+                <div class="filter-content" data-item="illustration">
+                    <img src="../images/gallery/ill3.jpg" alt="image8">
+                    <p>View Details</p>
+                </div>
+
+                <div class="filter-content" data-item="photography">
+                    <img src="../images/gallery/photo1.jpg" alt="image4">
+                    <p>View Details</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="lightbox">
+        <div class="lightbox-wrapper">
+            <!-- lightbox image content area -->
+            <div class="lightbox-content">
+                <div class="lightbox-header">
+                    <p>Category: <span id="image-category">Undefined</span></p>
+                    <div class="lightbox-close-btn">
+                        <span id="close-lightbox"></span>
+                    </div>
+                </div>
+    
+                <div class="image-wrapper">
+                    <img src="../images/gallery/ill1.jpg" id="lightbox-image" alt="project preview">
+                </div>
+            </div>
+
+            <!-- lightbox left & right slide button -->
+            <div class="lightbox-arrow">
+                <span class="icon-angle-left" id="left-arrow"></span>
+                <span class="icon-angle-right" id="right-arrow"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            // filter gallary
+            let filterMenu = document.querySelectorAll('.filter-menu > li');
+            let filterContents = document.querySelectorAll('.filter-content');
+
+            for (let i = 0; i < filterMenu.length; i++) {
+                filterMenu[i].addEventListener('click', () => {
+                    for (let j = 0; j < filterMenu.length; j++) {
+                        filterMenu[j].classList.remove('active-menu');
+                    }
+
+                    filterMenu[i].classList.add('active-menu');
+                    let attrValue = filterMenu[i].getAttribute('data-list');
+
+                    for (let k = 0; k < filterContents.length; k++) {
+                        // delete all active contents
+                        filterContents[k].classList.add('deleteContents');
+                        filterContents[k].classList.remove('activeContents');
+
+                        // display filter contents or display all contents (if attr is 'all')
+                        if (filterContents[k].getAttribute('data-item') === attrValue || attrValue === 'all') {
+                            filterContents[k].classList.add('activeContents');
+                            filterContents[k].classList.remove('deleteContents');
+                        }
+                    }
+                });
+            }
+
+            // lightbox
+            let lightbox = document.querySelector('.lightbox');
+            let closeBtn = document.querySelector('#close-lightbox');
+            let imgCategory = document.querySelector('#image-category');
+            let lightboxImage = document.querySelector('#lightbox-image');
+            let lightboxContent = document.querySelector('.lightbox-content');
+            let body = document.querySelector('body');
+
+            // left and right arrow button
+            let leftArrow = document.querySelector('#left-arrow');
+            let rightArrow = document.querySelector('#right-arrow');
+            let lightboxArrow = document.querySelector('.lightbox-arrow');
+
+            // update lightbox content when click or slide
+            function updatelightboxContent(index) {
+                let getCategory = filterContents[index].getAttribute('data-item');
+                let getImg = filterContents[index].querySelector('img').src;
+
+                imgCategory.textContent = getCategory;
+                lightboxImage.src = getImg;
+            }
+
+            for (let i = 0; i < filterContents.length; i++) {
+                // lightbox show, slide, close
+                filterContents[i].addEventListener('click', () => {
+
+                    lightbox.classList.add('show-lightbox');
+                    body.style.overflow = 'hidden';
+
+                    // show lightbox content
+                    updatelightboxContent(i);
+
+                    let slideIndex = i;
+
+                    // slide left
+                    leftArrow.onclick = (e) => {
+                        e.stopPropagation();
+                        slideIndex = (slideIndex + filterContents.length - 1) % filterContents.length;
+                        updatelightboxContent(slideIndex);
+                    }
+
+                    // slide right
+                    rightArrow.onclick = (e) => {
+                        e.stopPropagation();
+                        slideIndex = (slideIndex + 1) % filterContents.length;
+                        updatelightboxContent(slideIndex);
+                    }
+
+                    // slide when arrow key down
+                    document.onkeydown = (event) => {
+                        if (event.keyCode === 37) {
+                            slideIndex = (slideIndex + filterContents.length - 1) % filterContents.length;
+                            updatelightboxContent(slideIndex);
+                        }
+
+                        if (event.keyCode === 39) {
+                            slideIndex = (slideIndex + 1) % filterContents.length;
+                            updatelightboxContent(slideIndex);
+                        }
+                    }
+
+                    // close lightbox
+                    closeBtn.onclick = () => {
+                        lightbox.classList.remove('show-lightbox');
+                        body.style.overflow = 'auto';
+                    }
+
+                    lightbox.onclick = () => {
+                        lightbox.classList.remove('show-lightbox');
+                        body.style.overflow = 'auto';
+                    }
+
+                    lightboxContent.onclick = (e) => {
+                        e.stopPropagation();
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
