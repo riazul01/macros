@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!-- 
+    Project name: Digital Clock
+    Author: Md. Riazul Islam
+    Author URI: https://github.com/riazul01
+-------------------------------------------->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cabin Sketch', cursive;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, rgba(35, 35, 35, 0.5), rgba(35, 35, 35, 0.7)), url('../images/bg-images/clock-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .container {
+            padding: 1rem 0;
+            color: #fff;
+            height: auto;
+            width: 600px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+        }
+
+        #clock {
+            display: inline-block;
+            font-size: 70px;
+            padding: 20px;
+        }
+
+        #xm {
+            font-size: 35px;
+            font-weight: 500;
+        }
+
+        #today {
+            padding-bottom: 30px;
+            font-size: 35px;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        @media screen and (max-width: 760px) {
+            .container {
+                margin: 0 0.4rem;
+                height: auto;
+                width: 100%;
+                border: none;
+            }
+
+            #clock {
+                font-size: 50px;
+                padding: 10px;
+            }
+
+            #xm {
+                font-size: 20px;
+            }
+
+            #today {
+                font-size: 20px;
+            }
+        }
+
+        @media screen and (max-width: 420px) {
+            #clock {
+                font-size: 40px;
+            }
+        }
+
+        @media screen and (max-width: 340px) {
+            #clock {
+                font-size: 35px;
+            }
+
+            #xm {
+                font-size: 15px;
+            }
+
+            #today {
+                font-size: 15px;
+            }
+        }
+
+    </style>
+
+    <title>Digital Clock</title>
+</head>
+<body>
+    <div class="container">
+        <div class="time">
+            <h1 id="clock">00 : 00 : 00</h1>
+            <span id="xm">XM</span>
+        </div>
+        <p id="today">day, month dd, yyyy</p>
+    </div>
+
+    <script>
+        (function() {
+            const time = document.getElementById("clock");
+            const date = document.getElementById("today");
+            const timeX = document.getElementById("xm");
+
+            setInterval(() => {
+
+                let dt = new Date();
+
+                let hour = dt.getHours();
+                let minute = dt.getMinutes();
+                let second = dt.getSeconds();
+
+                let day = dt.getDate();
+                let weekDayIndex = dt.getDay();
+                let monthIndex = dt.getMonth();
+                let year = dt.getFullYear();
+
+                let weekDayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+                let xm = (hour >= 12) ? 'PM': 'AM';
+
+                if (hour > 12) {
+                    hour -= 12;
+                }
+
+                if (hour == 0) {
+                    hour = 12;
+                }
+
+                if (hour < 10) {
+                    hour = '0' + hour;
+                }
+
+                if (minute < 10) {
+                    minute = '0' + minute;
+                }
+
+                if (second < 10) {
+                    second = '0' + second;
+                }
+
+                if (day < 10) {
+                    day = '0' + day;
+                }
+
+                time.innerHTML = hour + ' : ' + minute + ' : ' + second + ' ';
+                timeX.innerHTML = xm;
+                date.innerHTML = weekDayNames[weekDayIndex] + ', ' + monthNames[monthIndex] + ' ' + day + ', ' + year;
+
+            }, 1000);
+        })();
+    </script>
+</body>
+</html>
