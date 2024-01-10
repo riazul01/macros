@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<!-- 
+    Project name: Background Slider
+    Author: Md. Riazul Islam
+    Author URI: https://github.com/riazul01
+-------------------------------------------->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tillana:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- icons -->
+    <link rel="stylesheet" href="../icon.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Tillana', cursive;
+            box-sizing: border-box;
+        }
+        
+        .bg-slider {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .slider-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .bg-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            transition: all 1s ease;
+        }
+
+        .bg-slide-1 {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../images/bg-images/slider-bg1.jpg');
+            background-size: cover;
+            z-index: 1;
+        }
+
+        .bg-slide-2 {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../images/bg-images/slider-bg2.jpg');
+            background-size: cover;
+            z-index: 1;
+        }
+
+        .bg-slide-3 {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../images/bg-images/slider-bg3.jpg');
+            background-size: cover;
+            z-index: 1;
+        }
+
+        .active-bg {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            z-index: 2;
+        }
+
+        .bg-slide-btns {
+            position: absolute;
+            bottom: 3rem;
+            right: 4rem;
+            height: auto;
+            width: 130px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 99;
+        }
+
+        .bg-slide-btns div {
+            height: 3rem;
+            width: 3rem;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            border-radius: 0.2rem;
+            background: olivedrab;
+            border: 2px solid #fff;
+        }
+
+        .bg-slide-btns div span {
+            color: #fff;
+            font-size: 1.8rem;
+        }
+
+        #bg-text {
+            position: absolute;
+            bottom: 3rem;
+            left: 3rem;
+            z-index: 9;
+        }
+
+        #bg-text p {
+            color: #fff;
+            font-size: 1.4rem;
+            text-shadow: 0 0 0.6rem #111;
+        }
+
+        @media screen and (max-width: 460px) {
+            .bg-slide-btns {
+                bottom: 2rem;
+                right: 1rem;
+                width: 120px;
+            }
+
+            #bg-text {
+                bottom: 2rem;
+                left: 1rem;
+            }
+        }
+    </style>
+    
+    <title>Background Slider</title>
+</head>
+<body>
+    <div class="bg-slider">
+        <!-- background image slider -->
+        <div class="slider-box">
+            <div class="bg-slide bg-slide-1 active-bg"></div>
+            <div class="bg-slide bg-slide-2"></div>
+            <div class="bg-slide bg-slide-3"></div>
+        </div>
+
+        <!-- slide button -->
+        <div class="bg-slide-btns">
+            <div class="bg-slide-left-btn">
+                <span class="icon-arrow-left"></span>
+            </div>
+            <div class="bg-slide-right-btn">
+                <span class="icon-arrow-right"></span>
+            </div>
+        </div>
+
+        <!-- hero text -->
+        <div id="bg-text">
+            <p>01 of 03</p>
+        </div>
+    </div>
+
+    <script>
+        // selecting parallax and slider elements
+        let parallax = document.querySelector('.bg-slide-1');
+        let slides = document.querySelectorAll('.bg-slide');
+        let slideCountText = document.querySelector('#bg-text > p');
+
+        // initialize slide index
+        let slideIndex = 0;
+
+        // slide left
+        function bgSlideLeft() {
+            slideIndex--;
+
+            if (slideIndex < 0) {
+                slideIndex = slides.length - 1;
+            }
+            
+            slides[slideIndex].classList.add('active-bg');
+            parallax.style.backgroundPositionY = 0 + 'px';
+            parallax = document.querySelector(`.bg-slide-${slideIndex + 1}`);
+            slideCountText.innerText = `0${slideIndex + 1} of 0${slides.length}`;
+        }
+
+        // slide right
+        function bgSlideRight() {
+            slideIndex++;
+
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            }
+
+            slides[slideIndex].classList.add('active-bg');
+            parallax.style.backgroundPositionY = 0 + 'px';
+            parallax = document.querySelector(`.bg-slide-${slideIndex + 1}`);
+            slideCountText.innerText = `0${slideIndex + 1} of 0${slides.length}`;
+        }
+
+        // remove previous slide
+        function removePrevSlide() {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active-bg');
+            }
+        }
+
+        let sliderId = null;
+
+        // auto slider
+        const autoSlider = () => {
+            sliderId = setInterval(() => {
+                removePrevSlide();
+                bgSlideRight();
+            }, 8000);
+        }
+
+        autoSlider();
+
+        // slide left right button
+        let bgSlideLeftBtn = document.querySelector('.bg-slide-left-btn');
+        let bgSlideRightBtn = document.querySelector('.bg-slide-right-btn');
+
+        // actions while left button click
+        bgSlideLeftBtn.onclick = () => {
+            clearInterval(sliderId);
+            removePrevSlide();
+            bgSlideLeft();
+            autoSlider();
+        }
+
+        // actions while right button click
+        bgSlideRightBtn.onclick = () => {
+            clearInterval(sliderId);
+            removePrevSlide();
+            bgSlideRight();
+            autoSlider();
+        }
+
+        // background text
+        let bgText = document.querySelector('#bg-text');
+
+        // actions while scroll up or down
+        window.onscroll = () => {
+            let scrollTop = document.documentElement.scrollTop;
+            let totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            let percentage = (scrollTop / totalHeight) * 100;
+
+            // parallax effect
+            parallax.style.backgroundPositionY = scrollTop * 0.7 + 'px';
+
+            // background text effect
+            bgText.style.top = 50 - percentage * 1.8 + '%';
+        }
+    </script>
+</body>
+</html>
