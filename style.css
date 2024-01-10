@@ -105,3 +105,86 @@ body {
     top: 0;
 }
 /* header end */
+
+
+
+.projects {
+    margin-bottom: 3rem;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid #000;
+    border-left: 1px solid #000;
+}
+
+.card {
+    height: 270px;
+    width: 100%;
+    background: #ddd;
+    border-bottom: 1px solid #000;
+    border-right: 1px solid #000;
+    overflow: hidden;
+}
+
+.thumb {
+    position: relative;
+    height: 80%;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.thumb img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.thumb:hover img {
+    transform: scale(1.2);
+}
+
+.thumb .tags {
+    position: absolute;
+    bottom: 1rem;
+    left: 0.85rem;
+    color: #fff;
+    z-index: 999;
+}
+
+.thumb .tags span {
+    padding: 0.2rem 0.4rem;
+    margin-right: 0.12rem;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 0.2rem;
+    box-shadow: 0.1rem 0.1rem 0.2rem #222;
+}
+
+.thumb .tags span.html {
+    background: #de5e02;
+}
+
+.thumb .tags span.css {
+    background: #11a9fb;
+}
+
+.thumb .tags span.javascript {
+    background: #d2ae10;
+}
+
+.title {
+    margin-left: 0.85rem;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.title p {
+    color: #222;
+    font-size: 1.2rem;
+}
