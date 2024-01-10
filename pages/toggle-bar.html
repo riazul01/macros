@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!-- 
+    Project name: Toggle Bar
+    Author: Md. Riazul Islam
+    Author URI: https://github.com/riazul01
+-------------------------------------------->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Bar</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            height: 100vh;
+            display: grid;
+            place-items: center;
+            background: #23282f;
+        }
+
+        .toggler {
+            width: 55px;
+            height: 50px;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            background: teal;
+            border-radius: 0.1rem;
+            z-index: 999;
+        }
+
+        .toggler .toggle-bar {
+            position: relative;
+            height: 3px;
+            width: 32px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .toggler .toggle-bar::before {
+            position: absolute;
+            content: '';
+            top: -0.7rem;
+            left: 0;
+            height: 3px;
+            width: 32px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .toggler .toggle-bar::after {
+            position: absolute;
+            content: '';
+            top: 0.7rem;
+            left: 0;
+            height: 3px;
+            width: 32px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .toggler.active .toggle-bar {
+            background: transparent;
+            transform: rotate(40deg);
+        }
+
+        .toggler.active .toggle-bar::before {
+            transform: rotate(-85deg);
+            top: 0;
+        }
+
+        .toggler.active .toggle-bar::after {
+            transform: rotate(5deg);
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="toggler">
+            <span class="toggle-bar"></span>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            let toggler = document.querySelector('.toggler');
+
+            toggler.addEventListener('click', () => {
+                toggler.classList.toggle('active');
+            });
+        })();
+    </script>
+</body>
+</html>
