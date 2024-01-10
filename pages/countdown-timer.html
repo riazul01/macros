@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<!-- 
+    Project name: Countdown Timer
+    Author: Md. Riazul Islam
+    Author URI: https://github.com/riazul01
+-------------------------------------------->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Spectral', serif;
+            box-sizing: border-box;
+            background: #0f1729;
+        }
+
+        .container {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timerBox {
+            padding: 1rem;
+            border: 2px solid #1e293b;
+            border-radius: 0.2rem;
+        }
+
+        #timer-type,
+        #input-format {
+            margin-right: 0.2rem;
+            padding: 0.2rem 0.4rem;
+            color: #fff;
+            font-size: 1.2rem;
+            border: none;
+            outline: none;
+            background: #1e293b;
+            border-radius: 0.2rem;
+        }
+
+        .timer-area {
+            margin-top: 1rem;
+            height: auto;
+            width: 500px;
+        }
+
+        .timer-area h1 {
+            color: #fff;
+            font-size: 3rem;
+        }
+
+        .timer-input {
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .timer-input.active {
+            display: block;
+        }
+
+        .timer-input>input {
+            padding: 0.3rem 0.6rem;
+            color: #fff;
+            font-size: 1.2rem;
+            border: none;
+            outline: none;
+            background: #1e293b;
+            border-radius: 0.2rem;
+            margin-right: 0.2rem;
+        }
+
+        .timer-input>input::placeholder {
+            color: #aaa;
+            font-size: 1.3rem;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* input[type=number] {
+            -moz-appearance: textfield;
+        } */
+
+        .day-hour>input {
+            width: 6rem;
+        }
+
+        .date-time>input {
+            color: #fff;
+        }
+
+        .timer-control {
+            margin-top: 1rem;
+        }
+
+        .timer-control button {
+            margin: 1rem 0.2rem 0 0;
+            padding: 0.2rem 1rem;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            outline: none;
+            border: none;
+            border-radius: 0.2rem;
+        }
+
+        #start-stop-btn {
+            background: seagreen;
+        }
+
+        #reset-btn {
+            background: crimson;
+        }
+
+        @media screen and (max-width: 620px) {
+            .container {
+                padding: 0 0.4rem;
+            }
+
+            .timerBox {
+                width: 100%;
+            }
+
+            #timer-type,
+            #input-format {
+                margin-bottom: 0.8rem;
+                font-size: 1rem;
+            }
+
+            .timer-area {
+                margin-top: 0.4rem;
+                width: 100%;
+            }
+
+            .timer-area h1 {
+                font-size: 2rem;
+            }
+
+            .timer-input>input {
+                font-size: 1rem;
+            }
+
+            .day-hour>input {
+                width: 6rem;
+                margin-bottom: 1rem;
+            }
+
+            .timer-control {
+                margin-top: 0;
+            }
+        }
+    </style>
+
+    <title>Countdown Timer</title>
+</head>
+<body>
+    <div class="container">
+        <div class="timerBox">
+            <select id="timer-type">
+                <option value="general">General</option>
+                <option value="infinite">Infinite</option>
+            </select>
+            <select id="input-format" onchange="switchFormat()">
+                <option value="opt-day-hour">DD:HH:MM:SS</option>
+                <option value="opt-date-time">Date-Time</option>
+            </select>
+            <div class="timer-area">
+                <h1>0d 0h 0m 0s</h1>
+            </div>
+            <div class="timer-input day-hour active">
+                <input type="number" id="day" placeholder="day">
+                <input type="number" id="hour" placeholder="hour">
+                <input type="number" id="minute" placeholder="minute">
+                <input type="number" id="second" placeholder="second">
+            </div>
+            <div class="timer-input date-time">
+                <input type="datetime-local" id="date">
+            </div>
+            <div class="timer-control">
+                <button id="start-stop-btn">Start</button>
+                <button id="reset-btn">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const timerType = document.querySelector('#timer-type');
+        const inputFormat = document.querySelector('#input-format');
+
+        const inputDayHourBox = document.querySelector('.day-hour');
+        const inputDateTimeBox = document.querySelector('.date-time');
+
+        const inputDay = document.querySelector('#day');
+        const inputHour = document.querySelector('#hour');
+        const inputMinute = document.querySelector('#minute');
+        const inputSecond = document.querySelector('#second');
+        const inputDate = document.querySelector('#date');
+
+        const startStopBtn = document.querySelector('#start-stop-btn');
+        const resetBtn = document.querySelector('#reset-btn');
+
+        let displayTime = document.querySelector('.timer-area > h1');
+
+        const switchFormat = () => {
+            if (inputFormat.value === 'opt-day-hour') {
+                inputDayHourBox.classList.add('active');
+                inputDateTimeBox.classList.remove('active');
+            } else {
+                inputDayHourBox.classList.remove('active');
+                inputDateTimeBox.classList.add('active');
+            }
+        }
+
+        const resetTimer = () => {
+            inputDay.value = null;
+            inputHour.value = null;
+            inputMinute.value = null;
+            inputSecond.value = null;
+            inputDate.value = null;
+
+            displayTime.innerHTML = `0d 0h 0m 0s`;
+            startStopBtn.removeAttribute('disabled');
+        }
+
+        const startCountDown = (time) => {
+
+            let countTime = time;
+
+            const timer = setInterval(() => {
+
+                let remainingTime = countTime--;
+
+                // seconds to days, hours, minutes and seconds
+                let days = Math.floor(remainingTime / 86400);
+                remainingTime = remainingTime % 86400;
+
+                let hours = Math.floor(remainingTime / 3600);
+                remainingTime = remainingTime % 3600;
+
+                let minutes = Math.floor(remainingTime / 60);
+                remainingTime = remainingTime % 60;
+
+                let seconds = Math.floor(remainingTime);
+
+                if (countTime < 0 && timerType.value === 'general') {
+                    clearInterval(timer);
+                    resetTimer();
+                }
+
+                if (countTime < 0 && timerType.value === 'infinite') {
+                    countTime = time;
+                }
+
+                resetBtn.onclick = () => {
+                    clearInterval(timer);
+                    resetTimer();
+                }
+
+                displayTime.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            }, 1000);
+        }
+
+        const calculateTimeInSecond = () => {
+            if (inputFormat.value === 'opt-day-hour') {
+                let dayVal = inputDay.value || 0;
+                let hourVal = inputHour.value || 0;
+                let minuteVal = inputMinute.value || 0;
+                let secondVal = inputSecond.value || 0;
+
+                return dayVal * 86400 + hourVal * 3600 + minuteVal * 60 + secondVal * 1;
+            } else {
+                let dateVal = inputDate.value || 0;
+                let eventTime = new Date(dateVal).getTime();
+                let curntTime = Date.now();
+                return (eventTime - curntTime) / 1000;
+            }
+        }
+
+        startStopBtn.onclick = () => {
+            let timeInSecond = calculateTimeInSecond();
+
+            if (timeInSecond > 0) {
+                startCountDown(timeInSecond);
+                startStopBtn.setAttribute('disabled', 'true');
+            } else {
+                alert('Please give a valid input!');
+                resetTimer();
+            }
+        }
+    </script>
+</body>
+</html>
