@@ -1,5 +1,32 @@
-* {
+@import url('https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap');
+
+/* utility start */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Belanosima', sans-serif;
 }
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    height: auto;
+    overflow-x: hidden;
+    background-image: linear-gradient(135deg, rgba(139, 53, 123,0.5) 0%, rgba(139, 53, 123,0.5) 10%,transparent 10%, transparent 19%,rgba(84, 33, 86,0.5) 19%, rgba(84, 33, 86,0.5) 27%,rgba(157, 60, 135,0.5) 27%, rgba(157, 60, 135,0.5) 53%,transparent 53%, transparent 56%,rgba(176, 66, 147,0.5) 56%, rgba(176, 66, 147,0.5) 61%,rgba(102, 40, 98,0.5) 61%, rgba(102, 40, 98,0.5) 100%),linear-gradient(45deg, rgb(139, 53, 123) 0%, rgb(139, 53, 123) 8%,transparent 8%, transparent 9%,transparent 9%, transparent 10%,rgb(157, 60, 135) 10%, rgb(157, 60, 135) 14%,rgb(121, 46, 110) 14%, rgb(121, 46, 110) 50%,rgb(176, 66, 147) 50%, rgb(176, 66, 147) 97%,rgb(102, 40, 98) 97%, rgb(102, 40, 98) 100%),linear-gradient(90deg, rgb(255,255,255),rgb(255,255,255));
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0 0.8rem;
+    max-width: 1300px;
+    height: auto;
+}
+/* utility end */
