@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!-- 
+    Project name: Infinite Countdown
+    Author: Md. Riazul Islam
+    Author URI: https://github.com/riazul01
+-------------------------------------------->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'New Tegomin', serif;
+        }
+
+        html {
+            overflow-x: hidden;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, rgba(35, 35, 35, 0.5), rgba(35, 35, 35, 0.7)), url('../images/bg-images/infinite-countdown-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .countdown-wrap {
+            width: 1000px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .timer {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .timer-bg {
+            height: 220px;
+            width: 220px;
+            border: none;
+            border-radius: 5%;
+            background: rgba(0, 0, 0, 0.5);
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(1rem);
+            transform: rotate(10deg);
+        }
+
+        .counter {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .counter h1 {
+            color: #fff;
+            font-size: 5rem;
+            text-align: center;
+        }
+
+        .counter p {
+            color: #fff;
+            font-size: 2rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        @media screen and (max-width: 1060px) {
+            .countdown-wrap {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .timer-bg {
+                height: 160px;
+                width: 160px;
+                margin: 0.4rem;
+            }
+
+            .counter h1 {
+                font-size: 3rem;
+            }
+
+            .counter p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media screen and (max-width: 344px) {
+            .countdown-wrap {
+                margin-top: 10rem;
+            }
+        }
+    </style>
+    
+    <title>Infinite Countdown Timer</title>
+</head>
+<body>
+    <div class="countdown-wrap">
+        <div class="timer">
+            <div class="timer-bg"></div>
+            <div class="counter">
+                <h1 id="day">00</h1>
+                <p>Days</p>
+            </div>
+        </div>
+
+        <div class="timer">
+            <div class="timer-bg"></div>
+            <div class="counter">
+                <h1 id="hour">00</h1>
+                <p>Hours</p>
+            </div>
+        </div>
+
+        <div class="timer">
+            <div class="timer-bg"></div>
+            <div class="counter">
+                <h1 id="minute">00</h1>
+                <p>Minutes</p>
+            </div>
+        </div>
+
+        <div class="timer">
+            <div class="timer-bg"></div>
+            <div class="counter">
+                <h1 id="second">00</h1>
+                <p>Seconds</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const day = document.getElementById('day');
+            const hour = document.getElementById('hour');
+            const minute = document.getElementById('minute');
+            const second = document.getElementById('second');
+
+            // Initialize date, month, year
+            let date = new Date();
+            let monthIndex = date.getMonth();
+            let year = date.getFullYear();
+
+            // Create infinite countdown
+            function createInfiniteCountdown(date, time) {
+                let curntTime = Date.now();
+                let month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+                let eventTime = new Date(`${month[monthIndex]} ${date}, ${year} ${time}`).getTime();
+                let totalSeconds = (eventTime - curntTime) / 1000;
+
+                if (totalSeconds < 0) {
+                    monthIndex = (monthIndex + 1) % 12;
+
+                    if (monthIndex === 0) {
+                        year = year + 1;
+                    }
+
+                    let eventTime = new Date(`${month[monthIndex]} ${date}, ${year} ${time}`).getTime();
+                    totalSeconds = (eventTime - curntTime) / 1000;
+                }
+
+                let dayConst = 86400;
+                let hourConst = 3600;
+                let minuteConst = 60;
+
+                let days = Math.floor(totalSeconds / dayConst);
+                totalSeconds = totalSeconds % dayConst;
+
+                let hours = Math.floor(totalSeconds / hourConst);
+                totalSeconds = totalSeconds % hourConst;
+
+                let minutes = Math.floor(totalSeconds / minuteConst);
+                totalSeconds = totalSeconds % minuteConst;
+
+                let seconds = Math.floor(totalSeconds);
+
+                if (days < 10) {
+                    days = '0' + days;
+                }
+
+                if (hours < 10) {
+                    hours = '0' + hours;
+                }
+
+                if (minutes < 10) {
+                    minutes = '0' + minutes;
+                }
+
+                if (seconds < 10) {
+                    seconds = '0' + seconds;
+                }
+
+                return [days, hours, minutes, seconds];
+            }
+
+            // Display and update timer
+            function updateCountDownTimer(time, dest) {
+                dest[0].textContent = time[0];
+                dest[1].textContent = time[1];
+                dest[2].textContent = time[2];
+                dest[3].textContent = time[3];
+            }
+
+            // Infinite countdown timer
+            let timeCount = setInterval(() => {
+                let createCountdown, updateDest;
+
+                createCountdown = createInfiniteCountdown('20', '12:00:00');
+                updateDest = [day, hour, minute, second];
+
+                updateCountDownTimer(createCountdown, updateDest);
+
+            }, 1000);
+        })();
+    </script>
+</body>
+</html>
