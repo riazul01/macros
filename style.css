@@ -89,4 +89,19 @@ body {
     background: #fff;
     transition: all 0.3s ease;
 }
+
+.toggler.active .toggle-bar {
+    background: transparent;
+    transform: rotate(40deg);
+}
+
+.toggler.active .toggle-bar::before {
+    transform: rotate(-85deg);
+    top: 0;
+}
+
+.toggler.active .toggle-bar::after {
+    transform: rotate(5deg);
+    top: 0;
+}
 /* header end */

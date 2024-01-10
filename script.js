@@ -1,1 +1,5 @@
-console.log('Hello World!');
+let toggler = document.querySelector('.toggler');
+
+toggler.addEventListener('click', () => {
+    toggler.classList.toggle('active');
+});
