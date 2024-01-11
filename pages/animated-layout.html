@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<!-- 
+    Project name: Animated Layout
+    Author: Md. Riazul Islam
+    Author URI: https://github.com/riazul01
+-------------------------------------------->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- animate css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    
+    <!-- icons -->
+    <link rel="stylesheet" href="../icon.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'League Spartan', sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: orange;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #222;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: #fff;
+            background: #111;
+            background-image: linear-gradient(45deg, rgba(86, 86, 86,0.04) 0%, rgba(86, 86, 86,0.04) 50%,rgba(169, 169, 169,0.04) 50%, rgba(169, 169, 169,0.04) 71%,rgba(251, 251, 251,0.04) 71%, rgba(251, 251, 251,0.04) 100%),linear-gradient(45deg, rgba(86, 86, 86,0.04) 0%, rgba(86, 86, 86,0.04) 56%,rgba(169, 169, 169,0.04) 56%, rgba(169, 169, 169,0.04) 67%,rgba(251, 251, 251,0.04) 67%, rgba(251, 251, 251,0.04) 100%),linear-gradient(135deg, rgba(86, 86, 86,0.04) 0%, rgba(86, 86, 86,0.04) 4%,rgba(169, 169, 169,0.04) 4%, rgba(169, 169, 169,0.04) 75%,rgba(251, 251, 251,0.04) 75%, rgba(251, 251, 251,0.04) 100%),linear-gradient(90deg, rgb(0,0,0),rgb(0,0,0));
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .container {
+            position: relative;
+            margin: 0 auto;
+            display: flex;
+            width: 100%;
+            max-width: 1520px;
+            height: auto;
+        }
+
+
+
+        /* header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            box-sizing: border-box;
+            z-index: 9;
+        }
+
+        .navbar {
+            padding: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+            width: 100%;
+        }
+
+        .navbar ul {
+            margin: 0 auto;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar ul li.dropdown {
+            position: relative;
+        }
+
+        .navbar ul li.dropdown > a {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .navbar ul li.dropdown > .dropdown-list {
+            padding: 1rem 0;
+            position: absolute;
+            top: 3.8rem;
+            left: 50%;
+            transform: translateX(-50%);
+            flex-direction: column;
+            width: 200px;
+            display: none;
+            background: #222;
+            border-radius: 0.3rem;
+        }
+
+        .navbar ul li.dropdown > .dropdown-list.active {
+            display: flex;
+        }
+
+        .navbar ul li a {
+            padding: 0.8rem 1.2rem;
+            position: relative;
+            display: block;
+            color: #fff;
+            font-size: 1.4rem;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .navbar ul li a:hover {
+            color: orange;
+        }
+
+        .navbar ul li a.active-link {
+            color: orange;
+        }
+
+        .navbar ul li a.active-link::before {
+            position: absolute;
+            content: attr(data-list);
+            left: 50%;
+            color: orange;
+            pointer-events: none;
+            transform: translateX(-50%);
+            animation: nav-link-anim 0.4s ease-in-out forwards;
+        }
+
+        .navbar ul li.dropdown a.active-link::before {
+            left: 43%;
+        }
+
+        @keyframes nav-link-anim {
+            0% {
+                letter-spacing: 0;
+                opacity: 1;
+            }
+            100% {
+                letter-spacing: 0.8rem;
+                opacity: 0;
+            }
+        }
+
+        .toggler {
+            position: fixed;
+            top: 1.6rem;
+            left: 2.8rem;
+            width: 50px;
+            height: 45px;
+            display: none;
+            place-items: center;
+            cursor: pointer;
+            border-radius: 0.1rem;
+            z-index: 99;
+        }
+
+        .toggle-bar {
+            position: relative;
+            height: 3px;
+            width: 32px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-bar::before {
+            position: absolute;
+            content: '';
+            top: -0.7rem;
+            left: 0;
+            height: 3px;
+            width: 32px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-bar::after {
+            position: absolute;
+            content: '';
+            top: 0.7rem;
+            left: 0;
+            height: 3px;
+            width: 32px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .toggler.active .toggle-bar {
+            background: transparent;
+            transform: rotate(40deg);
+        }
+
+        .toggler.active .toggle-bar::before {
+            transform: rotate(-85deg);
+            top: 0;
+        }
+
+        .toggler.active .toggle-bar::after {
+            transform: rotate(5deg);
+            top: 0;
+        }
+        /* header end */
+
+
+
+        /* sections */
+        .sections-wrapper {
+            position: absolute;
+            right: 0;
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        section {
+            padding: 6rem 3rem 4rem 3rem;
+            height: 100vh;
+            width: 100%;
+            display: block;
+            box-sizing: border-box;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        section.active-section {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            animation-duration: 1s;
+        }
+
+        .sections-wrapper.active-section-view > section {
+            position: fixed;
+            top: 0;
+            right: 0;
+        }
+
+        .section-contents {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(34, 34, 34, 0.5);
+            border-radius: 2rem;
+        }
+
+        section h1 {
+            color: #fff;
+            font-size: 3rem;
+        }
+        /* sections end */
+
+
+
+        /* settings start */
+        .settings {
+            padding: 1rem;
+            position: fixed;
+            top: 40px;
+            right: 0;
+            background: #fff;
+            transform: translateX(100%);
+            transition: transform 0.4s ease;
+            z-index: 999;
+        }
+
+        .settings.show-settings {
+            transform: translateX(0);
+        }
+
+        .toggle-settings {
+            position: absolute;
+            top: 0;
+            left: -50px;
+            height: 50px;
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-align: center;
+            background: #fff;
+            border-radius: 0.2rem 0 0 0.2rem;
+            border-right: 1px solid silver;
+            box-sizing: border-box;
+        }
+
+        .toggle-settings span {
+            color: #111;
+            font-size: 1.4rem;
+            animation: anim 1s linear infinite;
+        }
+
+        @keyframes anim {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .colors h4,
+        .themes h4,
+        .views h4 {
+            padding-bottom: 0.4rem;
+            color: #2e2e3f;
+            font-size: 1.2rem;
+            text-transform: capitalize;
+            border-bottom: 2px dashed silver;
+        }
+
+        .colors-box {
+            margin: 0.8rem 0 0.6rem 0.4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            row-gap: 1rem;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        .color-btn {
+            margin-right: 1rem;
+        }
+
+        .color-btn span {
+            font-size: 2rem;
+        }
+
+        .themes,
+        .views {
+            margin-top: 1rem;
+        }
+
+        .themes-box,
+        .views-box {
+            margin: 0.8rem 0 0.6rem 0;
+        }
+
+        .theme,
+        .view {
+            margin-bottom: 0.4rem;
+            padding: 0.6rem 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            cursor: pointer;
+            border-radius: 0.2rem;
+        }
+
+        .theme.active-theme-btn,
+        .view.active-view-btn  {
+            background: silver;
+        }
+
+        .theme:hover,
+        .view:hover {
+            background: silver;
+        }
+
+        .theme span,
+        .view span {
+            color: #222;
+            font-size: 1.2rem;
+        }
+
+        .theme p,
+        .view p {
+            color: #222;
+            font-size: 1.2rem;
+            margin-left: 0.4rem;
+        }
+        /* settings end*/
+
+
+
+        /* footer */
+        footer {
+            position: fixed;
+            bottom: 1.4rem;
+            left: 4rem;
+            z-index: 9;
+        }
+
+        footer > p {
+            font-size: 1.1rem;
+        }
+
+        footer > p > a {
+            color: orange;
+        }
+        /* footer end */
+
+
+
+        /* colors */
+        .navbar ul li a.orange:hover,
+        .navbar ul li a.orange.active-link,
+        body.light .navbar ul li a.orange:hover,
+        body.light .navbar ul li a.orange.active-link,
+        .navbar ul li a.orange.active-link::before,
+        footer > p > a.orange {
+            color: orange;
+        }
+
+        .navbar ul li a.blue:hover,
+        .navbar ul li a.blue.active-link,
+        body.light .navbar ul li a.blue:hover,
+        body.light .navbar ul li a.blue.active-link,
+        .navbar ul li a.blue.active-link::before,
+        footer > p > a.blue {
+            color: #1e90ff;
+        }
+
+        .navbar ul li a.green:hover,
+        .navbar ul li a.green.active-link,
+        body.light .navbar ul li a.green:hover,
+        body.light .navbar ul li a.green.active-link,
+        .navbar ul li a.green.active-link::before,
+        footer > p > a.green {
+            color: #22dd1b;
+        }
+
+        .navbar ul li a.purple:hover,
+        .navbar ul li a.purple.active-link,
+        body.light .navbar ul li a.purple:hover,
+        body.light .navbar ul li a.purple.active-link,
+        .navbar ul li a.purple.active-link::before,
+        footer > p > a.purple {
+            color: #f43fee;
+        }
+
+        .navbar ul li a.salmon:hover,
+        .navbar ul li a.salmon.active-link,
+        body.light .navbar ul li a.salmon:hover,
+        body.light .navbar ul li a.salmon.active-link,
+        .navbar ul li a.salmon.active-link::before,
+        footer > p > a.salmon {
+            color: #f46f60;
+        }
+
+        .navbar ul li a.red:hover,
+        .navbar ul li a.red.active-link,
+        body.light .navbar ul li a.red:hover,
+        body.light .navbar ul li a.red.active-link,
+        .navbar ul li a.red.active-link::before,
+        footer > p > a.red {
+            color: #ed2b33;
+        }
+
+        .navbar ul li a.violate:hover,
+        .navbar ul li a.violate.active-link,
+        body.light .navbar ul li a.violate:hover,
+        body.light .navbar ul li a.violate.active-link,
+        .navbar ul li a.violate.active-link::before,
+        footer > p > a.violate {
+            color: #5f4b8b;
+        }
+
+        .navbar ul li a.olive:hover,
+        .navbar ul li a.olive.active-link,
+        body.light .navbar ul li a.olive:hover,
+        body.light .navbar ul li a.olive.active-link,
+        .navbar ul li a.olive.active-link::before,
+        footer > p > a.olive {
+            color: #8ab92c;
+        }
+
+        .navbar ul li a.gray:hover,
+        .navbar ul li a.gray.active-link,
+        body.light .navbar ul li a.gray:hover,
+        body.light .navbar ul li a.gray.active-link,
+        .navbar ul li a.gray.active-link::before,
+        footer > p > a.gray {
+            color: #778899;
+        }
+
+        .navbar ul li a.crimson:hover,
+        .navbar ul li a.crimson.active-link,
+        body.light .navbar ul li a.crimson:hover,
+        body.light .navbar ul li a.crimson.active-link,
+        .navbar ul li a.crimson.active-link::before,
+        footer > p > a.crimson {
+            color: #ff0077;
+        }
+        /* colors end */
+
+
+
+        /* light theme */
+        body.light::-webkit-scrollbar-track {
+            background-color: #ccc;
+        }
+
+        body.light {
+            background: #fff;
+            background-image: radial-gradient(circle at 13% 47%, rgba(140, 140, 140,0.03) 0%, rgba(140, 140, 140,0.03) 25%,transparent 25%, transparent 100%),radial-gradient(circle at 28% 63%, rgba(143, 143, 143,0.03) 0%, rgba(143, 143, 143,0.03) 16%,transparent 16%, transparent 100%),radial-gradient(circle at 81% 56%, rgba(65, 65, 65,0.03) 0%, rgba(65, 65, 65,0.03) 12%,transparent 12%, transparent 100%),radial-gradient(circle at 26% 48%, rgba(60, 60, 60,0.03) 0%, rgba(60, 60, 60,0.03) 6%,transparent 6%, transparent 100%),radial-gradient(circle at 97% 17%, rgba(150, 150, 150,0.03) 0%, rgba(150, 150, 150,0.03) 56%,transparent 56%, transparent 100%),radial-gradient(circle at 50% 100%, rgba(25, 25, 25,0.03) 0%, rgba(25, 25, 25,0.03) 36%,transparent 36%, transparent 100%),radial-gradient(circle at 55% 52%, rgba(69, 69, 69,0.03) 0%, rgba(69, 69, 69,0.03) 6%,transparent 6%, transparent 100%),linear-gradient(90deg, rgb(255,255,255),rgb(255,255,255));
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        body.light .navbar ul li a {
+            color: #333;
+        }
+
+        body.light .navbar ul li a.active-link,
+        body.light .navbar ul li a:hover {
+            color: orange;
+        }
+
+        body.light .toggle-bar,
+        body.light .toggle-bar::before,
+        body.light .toggle-bar::after {
+            background: #222;
+        }
+
+        body.light .section-contents {
+            background: rgb(204, 204, 204, 0.3);
+        }
+
+        body.light .section-contents > h1 {
+            color: #222;
+        }
+
+        body.light .settings {
+            border: 1px solid #ddd;
+        }
+
+        body.light .toggle-settings {
+            top: -1px;
+            border: 1px solid #ddd;
+        }
+
+        body.light .navbar ul li.dropdown > .dropdown-list {
+            background: #ddd;
+        }
+
+        body.light footer > p {
+            color: #222;
+        }
+        /* light theme end */
+
+
+
+        /* responsive */
+        @media screen and (max-width: 720px) {
+            .toggler {
+                display: grid;
+            }
+
+            .navbar {
+                position: fixed;
+                top: 5rem;
+                left: 3rem;
+                width: 240px;
+                height: auto;
+                background: #222;
+                border-radius: 0.4rem;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateX(-100%);
+                transition: all 0.3s ease;
+            }
+
+            .navbar.active-nav {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateX(0);
+            }
+            
+            .navbar ul {
+                flex-direction: column;
+            }
+
+            .navbar ul li.dropdown {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .navbar ul li.dropdown > .dropdown-list {
+                position: relative;
+                top: initial;
+                left: initial;
+                transform: translateX(0);
+                background: #333;
+            }
+
+            body.light .navbar {
+                background: #ddd;
+            }
+
+            body.light .navbar ul li.dropdown > .dropdown-list {
+                background: #ccc;
+            }
+        }
+
+        @media screen and (max-width: 440px) {
+            .toggler {
+                left: 1.2rem;
+            }
+
+            .navbar {
+                left: 1.2rem;
+            }
+
+            section {
+                padding: 6rem 1.2rem 4rem 1.2rem;
+            }
+
+            footer {
+                left: 3rem;
+            }
+        }
+    </style>
+
+    <title>Navbar</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- header start -->
+        <header class="header">
+            <!-- navbar start -->
+            <div class="navbar">
+                <ul class="nav-items">
+                    <li><a href="#home" data-list="Home" class="active-link">Home</a></li>
+                    <li><a href="#about" data-list="About">About</a></li>
+                    <li class="dropdown">
+                        <a href="#services" data-list="Services">
+                            <span>Services</span>
+                            <span class="icon-angle-down"></span>
+                        </a>
+                        <ul class="dropdown-list">
+                            <li><a href="#dropdown1" data-list="dropdown">Dropdown1</a></li>
+                            <li><a href="#dropdown2" data-list="dropdown">Dropdown2</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#blog" data-list="Blog">Blog</a></li>
+                    <li><a href="#contact" data-list="Contact">Contact</a></li>
+                </ul>
+            </div>
+            <!-- navbar end -->
+
+            <div class="toggler">
+                <span class="toggle-bar"></span>
+            </div>
+        </header>
+        <!-- header end -->
+
+
+
+        <!-- section content start -->
+        <div class="sections-wrapper" data-view="section-view">
+            <section class="home" id="home">
+                <div class="section-contents">
+                    <h1>Home</h1>
+                </div>
+            </section>
+
+            <section class="about" id="about">
+                <div class="section-contents">
+                    <h1>About</h1>
+                </div>
+            </section>
+
+            <section class="services" id="services">
+                <div class="section-contents">
+                    <h1>Services</h1>
+                </div>
+            </section>
+
+            <section class="blog" id="blog">
+                <div class="section-contents">
+                    <h1>Blog</h1>
+                </div>
+            </section>
+
+            <section class="contact" id="contact">
+                <div class="section-contents">
+                    <h1>Contact</h1>
+                </div>
+            </section>
+        </div>
+        <!-- section content end -->
+
+
+
+        <!-- app settings start -->
+        <div class="settings">
+            <div class="toggle-settings">
+                <span class="icon-cog"></span>
+            </div>
+
+            <!-- change color -->
+            <div class="colors">
+                <h4>Switch colors</h4>
+                <ul class="colors-box">
+                    <li class="color-btn" data-color="orange">
+                        <span class="icon-tint" style="color: orange;"></span>
+                    </li>
+                    <li class="color-btn" data-color="blue">
+                        <span class="icon-tint" style="color: #1e90ff;"></span>
+                    </li>
+                    <li class="color-btn" data-color="green">
+                        <span class="icon-tint" style="color: #22dd1b;"></span>
+                    </li>
+                    <li class="color-btn" data-color="purple">
+                        <span class="icon-tint" style="color: #f43fee;"></span>
+                    </li>
+                    <li class="color-btn" data-color="salmon">
+                        <span class="icon-tint" style="color: #f46f60;"></span>
+                    </li>
+                    <li class="color-btn" data-color="red">
+                        <span class="icon-tint" style="color: #ed2b33;"></span>
+                    </li>
+                    <li class="color-btn" data-color="violate">
+                        <span class="icon-tint" style="color: #5f4b8b;"></span>
+                    </li>
+                    <li class="color-btn" data-color="olive">
+                        <span class="icon-tint" style="color: #8ab92c;"></span>
+                    </li>
+                    <li class="color-btn" data-color="gray">
+                        <span class="icon-tint" style="color: #778899;"></span>
+                    </li>
+                    <li class="color-btn" data-color="crimson">
+                        <span class="icon-tint" style="color: #ff0077;"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- change theme -->
+            <div class="themes">
+                <h4>Switch themes</h4>
+                <div class="themes-box">
+                    <div class="theme active-theme-btn" id="dark-theme-btn">
+                        <span class="icon-moon"></span>
+                        <p>Theme dark</p>
+                    </div>
+                    <div class="theme" id="light-theme-btn">
+                        <span class="icon-sun"></span>
+                        <p>Theme light</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- change view -->
+            <div class="views">
+                <h4>Switch views</h4>
+                <div class="views-box">
+                    <div class="view active-view-btn" id="section-view-btn">
+                        <span class="icon-layer-group"></span>
+                        <p>Section view</p>
+                    </div>
+                    <div class="view" id="scroll-view-btn">
+                        <span class="icon-scroll"></span>
+                        <p>Scroll view</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- app settings end -->
+
+        <footer>
+            <p>Created by <a href="https://github.com/riazul01" target="_blank">riazul01.</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // navbar
+        (function () {
+            const toggler = document.querySelector('.toggler');
+            const navBar = document.querySelector('.navbar');
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownList = document.querySelector('.dropdown-list');
+            const settings = document.querySelector('.settings');
+            const body = document.querySelector('body');
+
+            // remove navbar/dropdown while click on body
+            body.addEventListener('click', () => {
+                toggler.classList.remove('active');
+                navBar.classList.remove('active-nav');
+                dropdownList.classList.remove('active');
+            });
+
+            // toggle bar
+            toggler.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggler.classList.toggle('active');
+                navBar.classList.toggle('active-nav');
+                settings.classList.remove('show-settings');
+            });
+
+            navBar.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            dropdown.addEventListener('click', () => {
+                dropdownList.classList.toggle('active');
+            });
+
+            dropdownList.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        })();
+
+
+
+        // settings
+        (function () {
+            const settings = document.querySelector('.settings');
+            const toggleSettings = document.querySelector('.toggle-settings');
+            const toggler = document.querySelector('.toggler');
+            const navBar = document.querySelector('.navbar');
+            const body = document.querySelector('body');
+
+            // toggle switch box
+            toggleSettings.addEventListener('click', () => {
+                settings.classList.toggle('show-settings');
+                navBar.classList.remove('active-nav');
+                toggler.classList.remove('active');
+            });
+
+            // close switch box
+            body.addEventListener('click', () => {
+                settings.classList.remove('show-settings');
+            });
+
+            settings.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        })();
+
+
+
+        // switch color
+        (function () {
+            const colorBtns = document.querySelectorAll('.color-btn');
+            const navLinks = document.querySelectorAll('.navbar ul li a');
+            const footerLink = document.querySelector('footer > p > a');
+            let prevIndex = 0;
+
+            for (let i = 0; i < colorBtns.length; i ++) {
+                colorBtns[i].addEventListener('click', () => {
+                    for (let j = 0; j < navLinks.length; j ++) {
+                        navLinks[j].classList.remove(colorBtns[prevIndex].getAttribute('data-color'));
+                        footerLink.classList.remove(colorBtns[prevIndex].getAttribute('data-color'));
+                        navLinks[j].classList.add(colorBtns[i].getAttribute('data-color'));
+                        footerLink.classList.add(colorBtns[i].getAttribute('data-color'));
+                    }
+                    prevIndex = i;
+                });
+            }
+        })();
+
+
+
+        // switch theme
+        (function () {
+            const body = document.querySelector('body');
+            const darkThemeBtn = document.querySelector('#dark-theme-btn');
+            const lightThemeBtn = document.querySelector('#light-theme-btn');
+
+            darkThemeBtn.onclick = () => {
+                body.classList.remove('light');
+                darkThemeBtn.classList.add('active-theme-btn');
+                lightThemeBtn.classList.remove('active-theme-btn');
+            }
+
+            lightThemeBtn.onclick = () => {
+                body.classList.add('light');
+                darkThemeBtn.classList.remove('active-theme-btn');
+                lightThemeBtn.classList.add('active-theme-btn');
+            }
+        })();
+
+
+
+        // switch views
+        (function () {
+            const sectionViewBtn = document.querySelector('#section-view-btn');
+            const scrollViewBtn = document.querySelector('#scroll-view-btn');
+
+            const sections = document.querySelectorAll('section');
+            const sectionsWrapper = document.querySelector('.sections-wrapper');
+            const navLinks = document.querySelectorAll('.nav-items > li > a');
+
+            const animations = [
+                'animate__bounce',
+                'animate__flash',
+                'animate__pulse', 
+                'animate__rubberBand',
+                'animate__shakeX', 
+                'animate__shakeY',
+                'animate__headShake', 
+                'animate__swing',
+                'animate__tada', 
+                'animate__wobble',
+                'animate__jello', 
+                'animate__heartBeat',
+
+                'animate__backInDown', 
+                'animate__backInLeft',
+                'animate__backInRight', 
+                'animate__backInUp',
+
+                'animate__bounceIn', 
+                'animate__bounceInDown', 
+                'animate__bounceInLeft', 
+                'animate__bounceInRight', 
+                'animate__bounceInUp', 
+
+                'animate__fadeIn',
+                'animate__fadeInDown', 
+                'animate__fadeInDownBig',
+                'animate__fadeInLeft', 
+                'animate__fadeInLeftBig',
+                'animate__fadeInRight', 
+                'animate__fadeInRightBig',
+                'animate__fadeInUp', 
+                'animate__fadeInUpBig',
+                'animate__fadeInTopLeft', 
+                'animate__fadeInTopRight',
+                'animate__fadeInBottomLeft', 
+                'animate__fadeInBottomRight',
+
+                'animate__flip', 
+                'animate__flipInX', 
+                'animate__flipInY',
+
+                'animate__lightSpeedInRight', 
+                'animate__lightSpeedInLeft',
+
+                'animate__rotateIn', 
+                'animate__rotateInDownLeft',
+                'animate__rotateInDownRight', 
+                'animate__rotateInUpLeft',
+                'animate__rotateInUpRight', 
+
+                'animate__jackInTheBox',
+                'animate__rollIn', 
+
+                'animate__zoomIn', 
+                'animate__zoomInDown',
+                'animate__zoomInLeft', 
+                'animate__zoomInRight',
+                'animate__zoomInUp', 
+
+                'animate__slideInDown',
+                'animate__slideInLeft', 
+                'animate__slideInRight',
+                'animate__slideInUp'
+            ];
+
+
+
+            // ## section view logic ##
+            const switchToSectionView = () => {
+
+                sectionsWrapper.classList.add('active-section-view');
+
+                // activate current nav link
+                const activateNavLink = (index) => {
+                    for (let i = 0; i < navLinks.length; i ++) {
+                        navLinks[i].classList.remove('active-link');
+                    }
+                    navLinks[index].classList.add('active-link');
+                }
+
+                // activate selected section
+                const activateSection = (index) => {
+                    for (let i = 0; i < sections.length; i ++) {
+                        sections[i].classList.remove('active-section');
+                    }
+                    
+                    sections[index].classList.add('active-section');
+                }
+
+                // animate current section
+                const activeAnimation = (index) => {
+                    for (let i = 0; i < sections.length; i ++) {
+                        sections[i].classList.add('animate__animated');
+
+                        // remove previous animation
+                        for (let j = 0; j < animations.length; j ++) {
+                            sections[i].classList.remove(animations[j]);
+                        }
+                    }
+
+                    // add animation
+                    const animIndex = Math.floor(Math.random() * animations.length);
+                    sections[index].classList.add(animations[animIndex]);
+                }
+
+                let prevIndex = null;
+
+                const handleSectionView = (index) => {
+                    activateNavLink(index);
+                    activateSection(index);
+                    if (prevIndex !== index) {
+                        activeAnimation(index);
+                    }
+                    prevIndex = index;
+                }
+
+                // control navigation
+                const handleNavigation = () => {
+                    for (let i = 0; i < navLinks.length; i ++) {
+                        navLinks[i].onclick = () => {
+                            handleSectionView(i);
+                        };
+                    }
+                }
+
+                const resetSectionView = () => {
+                    handleSectionView(0);
+                    window.onscroll = () => {return null};
+                }
+
+                resetSectionView();
+                handleNavigation();
+            }
+
+
+
+            // ## scroll view logic ##
+            const switchToScrollView = () => {
+
+                sectionsWrapper.classList.remove('active-section-view');
+
+                const resetNavLinks = () => {
+                    for (let i = 0; i < navLinks.length; i ++) {
+                        navLinks[i].classList.remove('active-link');
+                    }
+                    navLinks[0].classList.add('active-link');
+                }
+
+                const removeAnimation = () => {
+                    for (let i = 0; i < sections.length; i ++) {
+                        sections[i].classList.remove('animate__animated');
+
+                        // remove added animation
+                        for (let j = 0; j < animations.length; j ++) {
+                            sections[i].classList.remove(animations[j]);
+                        }
+                    }
+                }
+
+                const removeClickEvents = () => {
+                    for (let i = 0; i < navLinks.length; i ++) {
+                        navLinks[i].onclick = () => {return null};
+                    }
+                }
+
+                const activateAllSections = () => {
+                    for (let i = 0; i < sections.length; i ++) {
+                        sections[i].classList.add('active-section');
+                    }
+                }
+
+                // scrollspy
+                const activateScrollSpy = () => {
+                    window.onscroll = () => {
+                        const scrollHeight = window.pageYOffset;
+
+                        for (let i = 0; i < sections.length; i++) {
+                            if (sections[i].offsetTop / 1.1 <= scrollHeight) {
+                                for (let j = 0; j < navLinks.length; j++) {
+                                    navLinks[j].classList.remove('active-link');
+                                }
+                                navLinks[i].classList.add('active-link');
+                            }
+                        }
+                    }
+                }
+
+                resetNavLinks();
+                removeAnimation();
+                removeClickEvents();
+                activateAllSections();
+                activateScrollSpy();
+            }
+
+            // initial logic
+            if (sectionsWrapper.getAttribute('data-view') === 'section-view') {
+                switchToSectionView();
+            } else {
+                switchToScrollView();
+            }
+
+            // switch to section view
+            sectionViewBtn.onclick = () => {
+                if (sectionsWrapper.getAttribute('data-view') === 'section-view') {
+                    return null;
+                } else {
+                    sectionsWrapper.setAttribute('data-view', 'section-view');
+                    scrollViewBtn.classList.remove('active-view-btn');
+                    sectionViewBtn.classList.add('active-view-btn');
+                    switchToSectionView();
+                }
+            }
+
+            // switch to scroll view
+            scrollViewBtn.onclick = () => {
+                if (sectionsWrapper.getAttribute('data-view') === 'scroll-view') {
+                    return null;
+                } else {
+                    sectionsWrapper.setAttribute('data-view', 'scroll-view');
+                    sectionViewBtn.classList.remove('active-view-btn');
+                    scrollViewBtn.classList.add('active-view-btn');
+                    switchToScrollView();
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>
