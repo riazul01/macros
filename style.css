@@ -217,6 +217,7 @@ body {
 
 
 
+/* projects start */
 .projects {
     margin-bottom: 3rem;
     width: 100%;
@@ -297,6 +298,9 @@ body {
     color: #222;
     font-size: 1.2rem;
 }
+/* projects end */
+
+
 
 /* footer start */
 footer {
@@ -306,7 +310,6 @@ footer {
     align-items: center;
     justify-content: center;
     background: rgba(0, 0, 0, 0.4);
-    /* border-radius: 0.3rem 0.3rem 0 0; */
     border: 1px solid #000;
 }
 

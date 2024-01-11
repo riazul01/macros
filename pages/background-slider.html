@@ -5,13 +5,15 @@
     Author URI: https://github.com/riazul01
 -------------------------------------------->
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tillana:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Tillana:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- icons -->
     <link rel="stylesheet" href="../icon.css">
 
@@ -22,7 +24,7 @@
             font-family: 'Tillana', cursive;
             box-sizing: border-box;
         }
-        
+
         .bg-slider {
             position: relative;
             height: 100vh;
@@ -133,9 +135,10 @@
             }
         }
     </style>
-    
+
     <title>Background Slider</title>
 </head>
+
 <body>
     <div class="bg-slider">
         <!-- background image slider -->
@@ -177,7 +180,7 @@
             if (slideIndex < 0) {
                 slideIndex = slides.length - 1;
             }
-            
+
             slides[slideIndex].classList.add('active-bg');
             parallax.style.backgroundPositionY = 0 + 'px';
             parallax = document.querySelector(`.bg-slide-${slideIndex + 1}`);
@@ -254,4 +257,5 @@
         }
     </script>
 </body>
+
 </html>

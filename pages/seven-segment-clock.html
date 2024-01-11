@@ -5,10 +5,11 @@
     Author URI: https://github.com/riazul01
 -------------------------------------------->
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <style>
         * {
             margin: 0;
@@ -41,67 +42,67 @@
             border-radius: 1.2rem;
         }
 
-        .clock > .clock-digit {
+        .clock>.clock-digit {
             position: relative;
             height: 100%;
             width: 90px;
         }
 
-        .clock-digit > span {
+        .clock-digit>span {
             position: absolute;
             clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
         }
 
-        .clock-digit > span.active {
+        .clock-digit>span.active {
             background: url('../images/bg-images/seg-bg.jpg');
             background-size: cover;
             background-position: center;
             z-index: 999;
         }
 
-        .clock-digit > span.seg1 {
+        .clock-digit>span.seg1 {
             top: 0;
             left: 0;
             height: 1rem;
             width: 100%;
         }
 
-        .clock-digit > span.seg2 {
+        .clock-digit>span.seg2 {
             top: 0;
             right: 0;
             height: 50%;
             width: 1rem;
         }
 
-        .clock-digit > span.seg3 {
+        .clock-digit>span.seg3 {
             right: 0;
             bottom: 0;
             height: 50%;
             width: 1rem;
         }
 
-        .clock-digit > span.seg4 {
+        .clock-digit>span.seg4 {
             left: 0;
             bottom: 0;
             height: 1rem;
             width: 100%;
         }
 
-        .clock-digit > span.seg5 {
+        .clock-digit>span.seg5 {
             left: 0;
             bottom: 0;
             height: 50%;
             width: 1rem;
         }
 
-        .clock-digit > span.seg6 {
+        .clock-digit>span.seg6 {
             top: 0;
             left: 0;
             height: 50%;
             width: 1rem;
         }
 
-        .clock-digit > span.seg7 {
+        .clock-digit>span.seg7 {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -118,7 +119,7 @@
             justify-content: center;
         }
 
-        .separator > span {
+        .separator>span {
             height: 1rem;
             width: 1rem;
             background: url('../images/bg-images/seg_bg.jpg');
@@ -126,7 +127,7 @@
             background-position: center;
         }
 
-        .separator > span.sep2 {
+        .separator>span.sep2 {
             margin-top: 2rem;
         }
 
@@ -154,9 +155,10 @@
             }
         }
     </style>
-    
+
     <title>Seven Segment Clock</title>
 </head>
+
 <body>
     <div class="container">
         <div class="clock">
@@ -230,14 +232,14 @@
     </div>
 
     <script>
-        (function() {
+        (function () {
             let segment = document.querySelectorAll('.clock-digit > span');
 
             let segmentDetector = (time) => {
                 let segmentBCD = ['1111110', '0110000', '1101101', '1111001', '0110011', '1011011', '1011111', '1110000', '1111111', '1111011'];
 
-                for (let i = 0; i < time.length; i ++) {
-                    for (let j = 0; j < 7; j ++) {
+                for (let i = 0; i < time.length; i++) {
+                    for (let j = 0; j < 7; j++) {
                         if (segmentBCD[time[i]][j] === '1') {
                             segment[i * 7 + j].classList.add('active');
                         } else {
@@ -260,7 +262,7 @@
                 hour = (hour < 10) ? '0' + hour : hour;
                 minute = (minute < 10) ? '0' + minute : minute;
                 second = (second < 10) ? '0' + second : second;
-            
+
                 let timeStr = ''.concat(hour, minute, second);
 
                 segmentDetector(timeStr);
@@ -269,4 +271,5 @@
         })();
     </script>
 </body>
+
 </html>
