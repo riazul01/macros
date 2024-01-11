@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap');
 
 /* utility start */
-*, *::before, *::after {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -104,6 +104,115 @@ body {
     transform: rotate(5deg);
     top: 0;
 }
+
+/* navbar start */
+.nav-box {
+    position: absolute;
+    top: 5rem;
+    right: 0;
+    width: 260px;
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(2rem);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    z-index: 99999;
+}
+
+.nav-box.active-nav {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.nav-left {
+    list-style-type: none;
+    height: auto;
+    max-height: 400px;
+    min-width: 260px;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 0.2rem;
+    pointer-events: auto;
+    transform: translate(0);
+    transition: all 0.3s ease;
+}
+
+.nav-left.active-right {
+    pointer-events: none;
+    transform: translate(-100%);
+}
+
+.nav-right {
+    min-width: 260px;
+    max-height: 400px;
+    background: #fff;
+    border-radius: 0.2rem;
+    overflow-y: auto;
+    pointer-events: none;
+    transform: translate(0);
+    transition: all 0.3s ease;
+}
+
+.nav-right.active-right {
+    pointer-events: auto;
+    transform: translate(-100%);
+}
+
+.nav-right ul{
+    width: 100%;
+    display: none;
+}
+
+.nav-right ul.active-list {
+    display: block;
+}
+
+.nav-left li,
+.nav-left > a,
+.nav-right ul li {
+    padding: 0.8rem;
+    color: #222;
+    font-size: 1.2rem;
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.nav-right ul li:first-child {
+    padding: 0.8rem;
+}
+
+.nav-right ul li {
+    padding: 0;
+}
+
+.nav-right ul li a {
+    padding: 0.8rem;
+    height: 100%;
+    width: 100%;
+    color: #222;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.nav-left li:hover,
+.nav-right ul li:hover,
+.nav-left a:hover,
+.nav-right ul li a:hover {
+    background: silver;
+}
+/* navbar end */
 /* header end */
 
 
