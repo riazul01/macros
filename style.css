@@ -138,7 +138,7 @@ body {
     min-width: 260px;
     overflow-y: auto;
     background: #fff;
-    border-radius: 0.2rem;
+    border: 1px solid #000;
     pointer-events: auto;
     transform: translate(0);
     transition: all 0.3s ease;
@@ -153,11 +153,23 @@ body {
     min-width: 260px;
     max-height: 400px;
     background: #fff;
-    border-radius: 0.2rem;
+    border: 1px solid #000;
     overflow-y: auto;
     pointer-events: none;
     transform: translate(0);
     transition: all 0.3s ease;
+}
+
+.nav-right::-webkit-scrollbar {
+    width: 5px;
+}
+
+.nav-right::-webkit-scrollbar-track {
+    background: #111;
+}
+
+.nav-right::-webkit-scrollbar-thumb {
+    background: #b43cb4;
 }
 
 .nav-right.active-right {
@@ -191,6 +203,8 @@ body {
 
 .nav-right ul li:first-child {
     padding: 0.8rem;
+    background: #ddd;
+    border-bottom: 1px solid #000;
 }
 
 .nav-right ul li {
