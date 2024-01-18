@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<!-- 
+    Project name: Products Layout
+    Author: Md. Riazul Islam
+    Author URI: https://github.com/riazul01
+-------------------------------------------->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;400;700&family=Satisfy&display=swap" rel="stylesheet">
+
+    <!-- icons -->
+    <link rel="stylesheet" href="../icon.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Averia Serif Libre', serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            height: auto;
+            width: 100%;
+        }
+
+        /* header start */
+        header {
+            height: auto;
+            width: 100%;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            z-index: 9999;
+        }
+
+        header.active-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            animation: header-anim 0.4s ease;
+        }
+
+        @keyframes header-anim {
+            0% {
+                transform: translateY(-10rem);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .navbar {
+            position: relative;
+            margin: 0 auto;
+            padding: 0 10px;
+            height: 4.5rem;
+            width: 100%;
+            max-width: 1420px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.4s ease;
+            z-index: 99999;
+        }
+
+        .logo a {
+            color: #206822;
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            font-family: 'Satisfy', cursive;
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-items li {
+            margin: 0 1rem 0;
+        }
+
+        .nav-items li a {
+            color: #211e25;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-items li a:hover,
+        .nav-items li a.active {
+            color: #206822;
+        }
+
+        .search-box {
+            margin-left: 0.4rem;
+            width: 20rem;
+            height: 2.2rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        .search-box input {
+            padding-left: 0.8rem;
+            height: 100%;
+            width: 82%;
+            color: #222;
+            font-size: 1rem;
+            border: none;
+            outline: none;
+            background: #eee;
+            box-sizing: border-box;
+            border-radius: 0.2rem 0 0 0.2rem;
+        }
+
+        input::placeholder {
+            font-size: 1rem;
+        }
+
+        .search-icon {
+            height: 100%;
+            width: 18%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #206822;
+            border-radius: 0 0.2rem 0.2rem 0;
+        }
+
+        .search-icon span {
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .icon-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon-links a {
+            position: relative;
+            margin-left: 1.6rem;
+            text-decoration: none;
+        }
+
+        .icon-links a>span {
+            color: #211e25;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        #item-counter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(0.9rem, -0.8rem);
+            height: 1.3rem;
+            width: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.8rem;
+            background: red;
+            border-radius: 50%;
+        }
+
+        .search-btn {
+            margin-left: 1.2rem;
+            font-size: 1.3rem;
+            display: none;
+        }
+
+        /* toggle bar */
+        .toggler {
+            margin-left: 0.8rem;
+            width: 50px;
+            height: 45px;
+            display: none;
+            place-items: center;
+            cursor: pointer;
+            border-radius: 0.1rem;
+            z-index: 999;
+        }
+
+        .toggle-bar {
+            position: relative;
+            height: 3px;
+            width: 28px;
+            background: #222;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-bar::before {
+            position: absolute;
+            content: '';
+            top: -0.6rem;
+            left: 0;
+            height: 3px;
+            width: 28px;
+            background: #222;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-bar::after {
+            position: absolute;
+            content: '';
+            top: 0.6rem;
+            left: 0;
+            height: 3px;
+            width: 28px;
+            background: #222;
+            transition: all 0.3s ease;
+        }
+
+        .toggler.active .toggle-bar {
+            background: transparent;
+            transform: rotate(40deg);
+        }
+
+        .toggler.active .toggle-bar::before {
+            transform: rotate(-85deg);
+            top: 0;
+        }
+
+        .toggler.active .toggle-bar::after {
+            transform: rotate(5deg);
+            top: 0;
+        }
+        /* header end */
+
+
+
+        /* products start */
+        .products {
+            margin: 0 auto;
+            padding: 1rem 0.6rem;
+            height: auto;
+            width: 100%;
+            max-width: 1420px;
+        }
+
+        .products>div {
+            margin-bottom: 4rem;
+            height: auto;
+            width: 100%;
+        }
+
+        .products-header {
+            padding: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .products-header p {
+            color: #211e25;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        .products-header a {
+            display: flex;
+            align-items: center;
+            color: olivedrab;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+
+        .products-header a span {
+            font-size: 1rem;
+            margin-left: 0.4rem;
+        }
+
+        .products-wrap {
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.2rem;
+        }
+
+        .product-card {
+            position: relative;
+            height: 360px;
+            width: 100%;
+            max-width: 280px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 0.2rem;
+            box-shadow: 0.4rem 0.4rem 1rem #ddd;
+            transition: all 0.4s ease;
+        }
+
+        .product-card:hover {
+            box-shadow: 0.4rem 0.4rem 1rem #cefccc;
+        }
+
+        .product-img {
+            position: relative;
+            width: 100%;
+            height: 55%;
+            border: 2px solid #fff;
+            border-radius: 0.2rem 0.2rem 0.6rem 0.6rem;
+        }
+
+        .product-img::before {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 0.2rem 0.2rem 0.8rem 0.8rem;
+        }
+
+        .product-img img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 0.2rem 0.2rem 0.8rem 0.8rem;
+        }
+
+        .add-to-favorite {
+            position: absolute;
+            top: 1.4rem;
+            left: 1rem;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .add-to-favorite span {
+            padding: 0.4rem;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            background: #61790a;
+            border-radius: 0.2rem;
+            box-shadow: 0.2rem 0.2rem 1rem #211e25;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .discount-tag {
+            padding: 0.4rem 0.6rem;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #fff;
+            font-size: 1.1rem;
+            background: linear-gradient(45deg, orangered 20%, red, red);
+            border-radius: 0.2rem;
+            box-shadow: 0.2rem 0.2rem 1rem #211e25;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .discount-tag span {
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .product-desc {
+            padding: 0.8rem;
+            margin-top: 0.2rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-name {
+            color: #211e25;
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .price-box {
+            margin-top: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .price-box strong,
+        .price-box div span,
+        .price-box del span,
+        .price-box ins span {
+            margin: 0 0.2rem;
+            color: #222;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .add-to-cart-btn {
+            padding: 0.6rem 0.8rem;
+            margin: 0 auto;
+            margin-top: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            background: #459122;
+            border-radius: 0.2rem;
+        }
+
+        .add-to-cart-btn span {
+            margin-right: 0.4rem;
+            color: #fff;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .add-to-cart-btn p {
+            color: #fff;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        /* products end */
+
+
+
+        /* subscribe start */
+        .subscribe {
+            width: 100%;
+            height: auto;
+            background: #211e25;
+            border-bottom: 1px solid #35323a;
+        }
+
+        .subscribe-wrap {
+            margin: 0 auto;
+            padding: 0 10px;
+            width: 100%;
+            max-width: 1420px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .subscribe-text p {
+            color: #fff;
+            font-size: 1.4rem;
+        }
+
+        .subscribe-input {
+            height: 3rem;
+            width: 30rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .subscribe-input input {
+            width: 65%;
+            height: 100%;
+            font-size: 1.2rem;
+            border: none;
+            outline: none;
+            padding: 0 1rem;
+        }
+
+        .subscribe-input input::placeholder {
+            font-size: 1.2rem;
+        }
+
+        .subscribe-input button {
+            color: #fff;
+            font-size: 1.2rem;
+            width: 35%;
+            height: 100%;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            background: orangered;
+            border: 2px solid #fff;
+            transition: all 0.3s ease;
+        }
+
+        .subscribe-input button:hover {
+            background: transparent;
+        }
+        /* subscribe end */
+
+
+
+        /* footer start */
+        .footer {
+            height: auto;
+            min-height: 280px;
+            background: #211e25;
+        }
+
+        .footer-wrap {
+            margin: 0 auto;
+            padding: 2rem 0.6rem;
+            width: 100%;
+            max-width: 1420px;
+            height: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-wrap>div {
+            margin-bottom: 2.8rem;
+            flex-basis: 340px;
+            box-sizing: border-box;
+        }
+
+        .footer-wrap>.f-box {
+            margin-bottom: 2.8rem;
+            flex-basis: 190px;
+        }
+
+        .footer-wrap>.payment-box {
+            margin-bottom: 1rem;
+        }
+
+        .f-box h2,
+        .payment-box h2 {
+            padding-bottom: 0.4rem;
+            position: relative;
+            color: #fff;
+            font-size: 1.4rem;
+        }
+
+        .f-box h2::before,
+        .payment-box h2::before {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            content: '';
+            height: 0.2rem;
+            width: 3.8rem;
+            background: #656565;
+            border-radius: 0 2rem 0 2rem;
+        }
+
+        /* site details start */
+        .flogo {
+            color: #fff;
+            font-size: 2rem;
+            font-family: 'Satisfy', cursive;
+            text-decoration: none;
+        }
+
+        .fdetails p {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-top: 0.4rem;
+        }
+
+        .social-links {
+            margin-top: 1.4rem;
+            display: flex;
+        }
+
+        .social-link {
+            margin-right: 1rem;
+        }
+
+        .social-link a {
+            text-decoration: none;
+        }
+
+        .social-link a span {
+            color: #656565;
+            font-size: 1.2rem;
+        }
+        /* site details end */
+
+
+
+        /* footer navigation start */
+        .links>div,
+        .payment-links>div {
+            padding-top: 0.2rem;
+        }
+
+        .links>p {
+            margin-top: 0.6rem;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .links>p>a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .links>p>a:hover {
+            color: #9fcf3d;
+        }
+        /* footer navigation end */
+
+
+
+        /* payment cards start */
+        .payment-cards {
+            margin-top: 0.6rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .payment-card {
+            margin: 0.4rem 1rem 0 0;
+        }
+
+        .payment-card a {
+            text-decoration: none;
+        }
+
+        .payment-card a span {
+            color: #fff;
+            font-size: 3rem;
+        }
+
+        /* payment cards end */
+
+        /* footer end */
+
+
+
+        /* copyright start */
+        .copyright {
+            display: flex;
+            height: 80px;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            background: #211e25;
+            border-top: 1px solid #35323a;
+        }
+
+        .copyright p {
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .copyright p a {
+            color: #9fcf3d;
+            text-decoration: none;
+        }
+        /* copyright end */
+
+
+
+        /* RESPONSIVE */
+        /* header start */
+        @media screen and (max-width: 1280px) {
+            .nav-items li {
+                margin: 0 0.7rem 0;
+            }
+
+            .icon-links a {
+                margin-left: 1.4rem;
+            }
+        }
+
+        @media screen and (max-width: 1020px) {
+            .toggler {
+                display: grid;
+            }
+
+            .nav-items {
+                padding: 0.4rem 0;
+                position: fixed;
+                right: 1rem;
+                top: 4rem;
+                width: 160px;
+                flex-direction: column;
+                background: #fff;
+                border: 1px solid #ddd;
+                border-radius: 0.2rem;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateX(30%);
+                transition: all 0.3s ease;
+                z-index: 9999;
+            }
+
+            .nav-items.active {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateX(0);
+            }
+
+            .nav-items>li {
+                margin: 0.3rem 0;
+            }
+        }
+
+        @media screen and (max-width: 580px) {
+            .search-btn {
+                display: block;
+            }
+
+            .search-box {
+                margin-left: 0;
+                padding: 0 0.4rem;
+                position: fixed;
+                top: 4rem;
+                left: 50%;
+                width: 100%;
+                max-width: 360px;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateX(-30%);
+            }
+
+            .search-box.active {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media screen and (max-width: 380px) {
+            .icon-links a {
+                margin-left: 1rem;
+            }
+
+            .search-btn {
+                margin-left: 0.8rem;
+            }
+
+            .toggler {
+                margin-left: 0.4rem;
+            }
+        }
+        /* header end */
+
+
+
+        /* products start */
+        @media screen and (max-width: 1400px) {
+            .products-wrap {
+                grid-template-columns: repeat(4, 1fr);
+                place-items: center;
+                gap: 1.6rem;
+            }
+        }
+
+        @media screen and (max-width: 1120px) {
+            .products-wrap {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 860px) {
+            .products-wrap {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 570px) {
+            .products-wrap {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+        /* products end */
+
+
+
+        /* subscribe start */
+        @media screen and (max-width: 980px) {
+            .subscribe {
+                padding: 1.4rem 0;
+            }
+
+            .subscribe-wrap {
+                height: auto;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .subscribe-text p {
+                text-align: center;
+            }
+
+            .subscribe-input {
+                margin-top: 1rem;
+            }
+        }
+
+        @media screen and (max-width: 520px) {
+            .subscribe-text p {
+                font-size: 1.2rem;
+            }
+
+            .subscribe-input {
+                height: 2.6rem;
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 380px) {
+            .subscribe-text p {
+                font-size: 1.1rem;
+            }
+
+            .subscribe-input input {
+                font-size: 1.1rem;
+            }
+
+            .subscribe-input input::placeholder {
+                font-size: 1.1rem;
+            }
+
+            .subscribe-input button {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media screen and (max-width: 350px) {
+            .subscribe-text p {
+                font-size: 1rem;
+            }
+
+            .subscribe-input input {
+                font-size: 1rem;
+            }
+
+            .subscribe-input input::placeholder {
+                font-size: 1rem;
+            }
+
+            .subscribe-input button {
+                font-size: 1rem;
+            }
+
+            .copyright p {
+                font-size: 0.9rem;
+            }
+        }
+        /* subscribe end */
+
+
+        /* copyright */
+        @media screen and (max-width: 440px) {
+            .copyright p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+
+    <title>Products</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- header start -->
+        <header class="header">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="#">eBazar.</a>
+                </div>
+
+                <ul class="nav-items">
+                    <li><a class="active" href="#">Home</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+
+                <div class="search-box">
+                    <input type="text" placeholder="Search...">
+                    <div class="search-icon">
+                        <span class="icon-search"></span>
+                    </div>
+                </div>
+
+                <div class="icon-links">
+                    <a href="#" id="support-center">
+                        <span class="icon-phone-alt">
+                    </a>
+                    <a href="#" id="shopping-cart-link">
+                        <span class="icon-cart-arrow-down">
+                            <span id="item-counter">2</span>
+                    </a>
+                    <a href="#" id="user-account-link">
+                        <span class="icon-user">
+                    </a>
+                    <div class="search-btn">
+                        <span class="icon-search"></span>
+                    </div>
+                    <div class="toggler">
+                        <span class="toggle-bar"></span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header end -->
+
+
+
+        <!-- products start -->
+        <section class="products">
+            <!-- top products -->
+            <div id="top-products">
+                <div class="products-header">
+                    <p>Top Products</p>
+                    <a href="#">See more <span class="icon-angle-double-right"></span></a>
+                </div>
+
+                <div class="products-wrap top-products">
+                    <!-- top-products: auto injected by js -->
+                </div>
+            </div>
+
+            <!-- recent products -->
+            <div id="recent-products">
+                <div class="products-header">
+                    <p>Recent Products</p>
+                    <a href="#">See more <span class="icon-angle-double-right"></span></a>
+                </div>
+
+                <div class="products-wrap recent-products">
+                    <!-- recent-products: auto injected by js -->
+                </div>
+            </div>
+
+            <!-- popular products -->
+            <div id="popular-products">
+                <div class="products-header">
+                    <p>Popular now</p>
+                    <a href="#">See more <span class="icon-angle-double-right"></span></a>
+                </div>
+
+                <div class="products-wrap popular-products">
+                    <!-- popular-products: auto injected by js -->
+                </div>
+            </div>
+
+            <!-- vegetables -->
+            <div id="vegetables">
+                <div class="products-header">
+                    <p>Fresh Vegetables</p>
+                    <a href="#">See more <span class="icon-angle-double-right"></span></a>
+                </div>
+
+                <div class="products-wrap vegetables">
+                    <!-- vegetables: auto injected by js -->
+                </div>
+            </div>
+
+            <!-- fruits -->
+            <div id="fruits">
+                <div class="products-header">
+                    <p>Fresh Fruits</p>
+                    <a href="#">See more <span class="icon-angle-double-right"></span></a>
+                </div>
+
+                <div class="products-wrap fruits">
+                    <!-- vegetables: auto injected by js -->
+                </div>
+            </div>
+
+            <!-- meat & fish -->
+            <div id="meat-fish">
+                <div class="products-header">
+                    <p>Meat & Fish</p>
+                    <a href="#">See more <span class="icon-angle-double-right"></span></a>
+                </div>
+
+                <div class="products-wrap meat-fish">
+                    <!-- vegetables: auto injected by js -->
+                </div>
+            </div>
+
+            <!-- eggs -->
+            <div id="eggs">
+                <div class="products-header">
+                    <p>Eggs</p>
+                    <a href="#">See more <span class="icon-angle-double-right"></span></a>
+                </div>
+
+                <div class="products-wrap eggs">
+                    <!-- vegetables: auto injected by js -->
+                </div>
+            </div>
+
+            <!-- beverages -->
+            <div id="beverages">
+                <div class="products-header">
+                    <p>Beverages</p>
+                    <a href="#">See more <span class="icon-angle-double-right"></span></a>
+                </div>
+
+                <div class="products-wrap beverages">
+                    <!-- vegetables: auto injected by js -->
+                </div>
+            </div>
+
+            <!-- spices -->
+            <div id="spices">
+                <div class="products-header">
+                    <p>Spices</p>
+                    <a href="#">See more <span class="icon-angle-double-right"></span></a>
+                </div>
+
+                <div class="products-wrap spices">
+                    <!-- vegetables: auto injected by js -->
+                </div>
+            </div>
+
+            <!-- dried fruits -->
+            <div id="dried-fruits">
+                <div class="products-header">
+                    <p>Dried Fruits</p>
+                    <a href="#">See more <span class="icon-angle-double-right"></span></a>
+                </div>
+
+                <div class="products-wrap dried-fruits">
+                    <!-- vegetables: auto injected by js -->
+                </div>
+            </div>
+        </section>
+        <!-- products end -->
+
+
+
+        <!-- subscribe start -->
+        <section class="subscribe">
+            <div class="subscribe-wrap">
+                <div class="subscribe-text">
+                    <p>Subscribe to get all product updates first</p>
+                </div>
+
+                <form class="subscribe-input">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </section>
+        <!-- subscribe end -->
+
+
+
+        <!-- footer start -->
+        <footer class="footer">
+            <div class="footer-wrap">
+                <div class="site-details">
+                    <a href="#" class="flogo">eBazar.</a>
+                    <div class="fdetails">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto deserunt et
+                            distinctio Animi possimus sed.</p>
+                    </div>
+                    <div class="social-links">
+                        <div class="social-link">
+                            <a href="#"><span class="icon-facebook-f"></span></a>
+                        </div>
+
+                        <div class="social-link">
+                            <a href="#"><span class="icon-instagram"></span></a>
+                        </div>
+
+                        <div class="social-link">
+                            <a href="#"><span class="icon-twitter"></span></a>
+                        </div>
+
+                        <div class="social-link">
+                            <a href="#"><span class="icon-linkedin-in"></span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="f-box">
+                    <h2>Menu</h2>
+                    <div class="links">
+                        <p><a href="#">Home</a></p>
+                        <p><a href="#">Products</a></p>
+                        <p><a href="#">Services</a></p>
+                        <p><a href="#">About</a></p>
+                        <p><a href="#">Contact</a></p>
+                    </div>
+                </div>
+
+                <div class="f-box">
+                    <h2>Trending</h2>
+                    <div class="links">
+                        <p><a href="#">Top Products</a></p>
+                        <p><a href="#">Recent Products</a></p>
+                        <p><a href="#">Popular now</a></p>
+                        <p><a href="#">Vegetables</a></p>
+                        <p><a href="#">Fruits</a></p>
+                    </div>
+                </div>
+
+                <div class="f-box">
+                    <h2>Quick Links</h2>
+                    <div class="links">
+                        <p><a href="#">User Account</a></p>
+                        <p><a href="#">Become An Affilate</a></p>
+                        <p><a href="#">New Offer</a></p>
+                        <p><a href="#">Recent Blogs</a></p>
+                        <p><a href="#">Help</a></p>
+                    </div>
+                </div>
+
+                <div class="payment-box">
+                    <h2>Easy Payment</h2>
+                    <div class="payment-cards">
+                        <div class="payment-card">
+                            <a href="#"><span class="icon-cc-amazon-pay"></span></a>
+                        </div>
+
+                        <div class="payment-card">
+                            <a href="#"><span class="icon-cc-mastercard"></span></a>
+                        </div>
+
+                        <div class="payment-card">
+                            <a href="#"><span class="icon-cc-paypal"></span></a>
+                        </div>
+
+                        <div class="payment-card">
+                            <a href="#"><span class="icon-cc-stripe"></span></a>
+                        </div>
+
+                        <div class="payment-card">
+                            <a href="#"><span class="icon-cc-visa"></span></a>
+                        </div>
+
+                        <div class="payment-card">
+                            <a href="#"><span class="icon-cc-discover"></span></a>
+                        </div>
+
+                        <div class="payment-card">
+                            <a href="#"><span class="icon-cc-jcb"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer end -->
+
+
+
+        <!-- copyright start -->
+        <section class="copyright">
+            <p>Created by <a href="https://github.com/riazul01" target="_blank">riazul01</a> |
+                &copy;2023 All rights reserved</p>
+        </section>
+        <!-- copyright end -->
+    </div>
+
+    <!-- custom js -->
+    <script src="../js/products.js" type="module"></script>
+</body>
+
+</html>
