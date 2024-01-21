@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- 
-    Project name: Products Layout
+    Project name: Grocery Store Template
     Author: Md. Riazul Islam
     Author URI: https://github.com/riazul01
 -------------------------------------------->
@@ -15,6 +15,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;400;700&family=Satisfy&display=swap" rel="stylesheet">
 
+    <!-- animate css cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
     <!-- icons -->
     <link rel="stylesheet" href="../icon.css">
 
@@ -28,6 +31,7 @@
 
         html {
             scroll-behavior: smooth;
+            
         }
 
         .container {
@@ -245,6 +249,228 @@
             top: 0;
         }
         /* header end */
+
+
+
+        /* hero start */
+        .hero {
+            height: 440px;
+            width: 100%;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/bg-images/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        marquee {
+            color: #fff;
+            width: 100%;
+            height: 1.4rem;
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-wrap {
+            margin: 0 auto;
+            padding: 1rem 0.6rem;
+            position: relative;
+            width: 100%;
+            max-width: 1420px;
+            height: auto;
+            min-height: calc(100% - 1.4rem);
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .hero-image {
+            height: 360px;
+            width: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            animation-delay: 0.3s;
+        }
+
+        .hero-desc {
+            width: 60%;
+            height: auto;
+        }
+
+        .hero-desc h1 {
+            margin-bottom: 0.6rem;
+            color: #fff;
+            font-size: 4rem;
+            font-weight: bold;
+            text-shadow: 0.2rem 0.2rem 1rem #211e25;
+        }
+
+        .hero-desc button {
+            margin: 1rem 0 0 0.4rem;
+            color: #fff;
+            font-size: 1.6rem;
+            height: 3.6rem;
+            width: 10rem;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            border-radius: 0.1rem;
+            background: #206822;
+            box-shadow: 0.2rem 0.2rem 1rem #211e25;
+            animation-delay: 0.5s;
+        }
+
+        .hero-slide-btns {
+            position: absolute;
+            right: 0;
+            bottom: 2rem;
+            height: auto;
+            width: 7.4rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .hero-slide-btns > div {
+            height: 3rem;
+            width: 3rem;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            cursor: pointer;
+        }
+
+        .hero-slide-btns > div > span {
+            color: #ddd;
+            font-size: 1.8rem;
+        }
+        /* hero end */
+
+
+
+        /* call to action start */
+        .call-to-action {
+            padding: 3rem 0;
+            width: 100%;
+            height: auto;
+        }
+
+        .call-to-action-wrap {
+            margin: 0 auto;
+            padding: 0 0.6rem;
+            width: 100%;
+            max-width: 1420px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            overflow-x: hidden;
+        }
+
+        .cta-desc {
+            width: 30%;
+            min-width: 360px;
+            height: 100%;
+        }
+
+        .cta-desc h1 {
+            color: #211e25;
+            font-size: 2.6rem;
+            line-height: 3rem;
+            padding-right: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .cta-desc p {
+            color: #211e25;
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+        }
+
+        .cta-desc button {
+            margin-top: 0.4rem;
+            color: #fff;
+            font-size: 1.2rem;
+            height: 2.6rem;
+            width: 8rem;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            border-radius: 0.1rem;
+            background: #206822;
+        }
+
+        .cta-cards {
+            height: 250px;
+            width: 70%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .cta-card {
+            margin-left: 20px;
+            position: relative;
+            min-width: 305px;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 0.1rem;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .cta-card::before {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-card-image {
+            width: 100%;
+            height: 100%;
+        }
+
+        .cta-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cta-card-text {
+            padding: 1rem 0 1rem 1.4rem;
+            position: absolute;
+            bottom: 1.6rem;
+            left: 0rem;
+            width: 14.4rem;
+            border-left: 7px solid #459122;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .cta-card-text h3 {
+            color: #fff;
+            font-size: 1.6rem;
+            text-shadow: 0.1rem 0.1rem 1rem #211e25;
+        }
+
+        .cta-card-text p {
+            padding-top: 0.3rem;
+            color: #ddd;
+            font-size: 1.3rem;
+            font-weight: 500;
+            text-shadow: 0.1rem 0.1rem 1rem #211e25;
+        }
+        /* call to action end */
 
 
 
@@ -755,6 +981,143 @@
 
 
 
+        /* hero and call to action start */
+        @media screen and (max-width: 1280px) {
+            .hero-image {
+                height: 320px;
+                width: 380px;
+            }
+            
+            .hero-desc h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-desc button {
+                font-size: 1.2rem;
+                height: 3rem;
+                width: 8rem;
+            }
+
+            .hero-desc button {
+                margin-left: 0.2rem;
+            }
+            
+            .hero-slide-btns {
+                right: 1rem;
+                bottom: 2rem;
+            }
+
+            .cta-desc h1 {
+                font-size: 2.2rem;
+            }
+
+            .cta-desc button {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media screen and (max-width: 860px) {
+            .hero-image {
+                height: 230px;
+                width: 270px;
+            }
+            
+            .hero-desc h1 {
+                font-size: 2.4rem;
+            }
+            
+            .hero-desc button {
+                height: 2.6rem;
+                width: 7rem;
+            }
+
+            .cta-desc p {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            .call-to-action {
+                padding: 2rem 0;
+            }
+
+            .call-to-action-wrap {
+                flex-direction: column;
+                align-items: start;
+            }
+
+            .cta-desc {
+                margin-left: 10px;
+                width: 100%;
+                max-width: 360px;
+                min-width: auto;
+            }
+
+            .cta-cards {
+                margin-top: 2rem;
+                width: 100%;
+            }
+
+            .cta-card {
+                margin: 0 12px 0 8px;
+            }
+
+            .cta-card-text h3 {
+                font-size: 1.3rem;
+            }
+            
+            .cta-card-text p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .hero {
+                height: calc(100vh - 73px);
+            }
+
+            .hero-wrap {
+                flex-direction: column;
+                justify-content: start;
+            }
+
+            .hero-image {
+                margin-top: 1rem;
+            }
+
+            .hero-desc {
+                margin-top: 1rem;
+                width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 380px) {
+            .hero-image {
+                height: 200px;
+                width: 240px;
+            }
+            
+            .hero-desc h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-desc button {
+                height: 2.6rem;
+                width: 7rem;
+            }
+
+            .call-to-action {
+                padding-top: 1rem;
+            }
+
+            .cta-desc h1 {
+                font-size: 2rem;
+            }
+        }
+        /* hero and call to action end */
+
+
+
         /* products start */
         @media screen and (max-width: 1400px) {
             .products-wrap {
@@ -916,6 +1279,57 @@
             </div>
         </header>
         <!-- header end -->
+
+
+
+        <!-- hero section start -->
+        <section class="hero">
+            <marquee behavior="scroll" scrollamount="10" direction="left">
+                Welcome to eBazar! Get your daily needs easy and instant from our shop. Buy fresh and organic fruits
+                with a big discount! Please use this voucher code (#234307) to get upto 50% discunt from your total
+                purchase. Dear sir, Now you can get upto 50% discount of any product just using this voucher code (#234307).
+                Don't forget to submit this code at the checkout time of your purchase. Thank You!
+            </marquee>
+
+            <div class="hero-wrap">
+                <div class="hero-image">
+                    <img class="animate__animated animate__bounceInDown" src="../images/hero/01.png" alt="hero-img">
+                </div>
+
+                <div class="hero-desc">
+                    <h1 class="animate__animated animate__bounceInRight hero-title">The best dried fruits for your family health</h1>
+                    <button class="animate__animated animate__bounceInUp hero-button">Explore</button>
+                </div>
+
+                <div class="hero-slide-btns">
+                    <div class="hero-slide-left">
+                        <span class="icon-arrow-left"></span>
+                    </div>
+                    <div class="hero-slide-right">
+                        <span class="icon-arrow-right"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- hero section end -->
+
+
+
+        <!-- call to action start -->
+        <section class="call-to-action">
+            <div class="call-to-action-wrap">
+                <div class="cta-desc">
+                    <h1>Fresh vegetables with great discount upto 30% off</h1>
+                    <p>Big offers going on!</p>
+                    <button>View More</button>
+                </div>
+
+                <div class="cta-cards">
+                    <!-- cards: auto injected by js -->
+                </div>
+            </div>
+        </section>
+        <!-- call to action end -->
 
 
 

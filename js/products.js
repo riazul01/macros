@@ -3,7 +3,7 @@ import { products } from "./data.js";
 // HEADER
 (function() {
     let header = document.querySelector('.header');
-    let products = document.querySelector('.products');
+    let hero = document.querySelector('.hero');
     let toggleBar = document.querySelector('.toggler');
     let navItems = document.querySelector('.nav-items');
     let searchBtn = document.querySelector('.search-btn');
@@ -15,10 +15,10 @@ import { products } from "./data.js";
 
         if (scrollTop > header.offsetHeight) {
             header.classList.add('active-header');
-            products.style.marginTop = header.offsetHeight + 'px';
+            hero.style.marginTop = header.offsetHeight + 'px';
         } else {
             header.classList.remove('active-header');
-            products.style.marginTop = 0 + 'px';
+            hero.style.marginTop = 0 + 'px';
         }
     }
 
@@ -49,6 +49,187 @@ import { products } from "./data.js";
     searchBox.onclick = (e) => {
         e.stopPropagation();
     }
+})();
+
+
+
+// HERO
+(function() {
+    let heroImg = document.querySelector('.hero-image');
+    let heroDesc = document.querySelector('.hero-desc');
+
+    // update hero image
+    const updateHeroImage = (imgIndex) => {
+        let imgSrc = ['01.png', '02.png', '03.png', '04.png', '05.png', '06.png'];
+        let oldImg = document.querySelector('.hero-image img');
+        heroImg.removeChild(oldImg);
+
+        let newImg = document.createElement('img');
+        newImg.setAttribute('class', 'animate__animated animate__bounceInDown');
+        newImg.src = `../images/hero/${imgSrc[imgIndex]}`;
+
+        heroImg.appendChild(newImg);
+    }
+
+    // update hero title
+    const updateHeroTitle = (titleIndex) => {
+        let txt1 = `The best dried fruits for your family health`;
+        let txt2 = `Get your daily needs easy and instant`;
+        let txt3 = `Try fresh fruits for better healthy lifestyle`;
+        let txt4 = `Get upto 50% discount on every products`;
+        let txt5 = `Hot deals available with amazing products`;
+        let txt6 = `Fresh vegetables with a big discount`;
+
+        let textAra = [txt1, txt2, txt3, txt4, txt5, txt6];
+
+        let oldText = document.querySelector('.hero-title');
+        heroDesc.removeChild(oldText);
+
+        let newTitle = document.createElement('h1');
+        newTitle.setAttribute('class', 'animate__animated animate__bounceInRight hero-title');
+        newTitle.textContent = `${textAra[titleIndex]}`;
+
+        heroDesc.appendChild(newTitle);
+    }
+
+    // update hero button
+    const updateHeroButton = () => {
+        let oldButton = document.querySelector('.hero-button');
+        heroDesc.removeChild(oldButton);
+
+        let newButton = document.createElement('button');
+        newButton.textContent = `Explore`;
+        newButton.setAttribute('class', 'animate__animated animate__bounceInUp hero-button');
+
+        heroDesc.appendChild(newButton);
+    }
+
+    // initial slide position
+    let heroIndex = 0;
+
+    // slide right
+    const heroSlideRight = () => {
+        heroIndex++;
+
+        if (heroIndex === 6) {
+            heroIndex = heroIndex % 6;
+        }
+
+        updateHeroImage(heroIndex);
+        updateHeroTitle(heroIndex);
+        updateHeroButton();
+    }
+
+    // slide left
+    const heroSlideLeft = () => {
+        heroIndex--;
+
+        if (heroIndex < 0) {
+            heroIndex = 5;
+        }
+
+        updateHeroImage(heroIndex);
+        updateHeroTitle(heroIndex);
+        updateHeroButton();
+    }
+
+    let slideTimerId = null;
+
+    // auto slide
+    const autoSlideRight = () => {
+        slideTimerId = setInterval(() => {
+            heroSlideRight();
+        }, 10000);
+    }
+
+    // slider button
+    let heroSlideLeftBtn = document.querySelector('.hero-slide-left');
+    let heroSlideRightBtn = document.querySelector('.hero-slide-right');
+
+    heroSlideLeftBtn.onclick = () => {
+        clearInterval(slideTimerId);
+        heroSlideLeft();
+        autoSlideRight();
+    }
+
+    heroSlideRightBtn.onclick = () => {
+        clearInterval(slideTimerId);
+        heroSlideRight();
+        autoSlideRight();
+    }
+
+    autoSlideRight();
+})();
+
+
+
+// CALL TO ACTION
+(function() {
+    const createCallToActionCard = (product) => {
+        const cardImage = document.createElement('div');
+        cardImage.setAttribute('class', 'cta-card-image');
+
+        const image = document.createElement('img');
+        image.src = product.imageUrl;
+        image.alt = product.name.split(' ').join('-');
+
+        cardImage.appendChild(image);
+
+        const cardText = document.createElement('div');
+        cardText.setAttribute('class', 'cta-card-text');
+
+        const cardTitle = document.createElement('h3');
+        cardTitle.textContent = product.name;
+
+        const cardPrice = document.createElement('p');
+        cardPrice.textContent = product.price + product.currency + '/' + product.unit;
+        
+        cardText.appendChild(cardTitle);
+        cardText.appendChild(cardPrice);
+
+        const card = document.createElement('div');
+        card.setAttribute('class', 'cta-card');
+
+        card.appendChild(cardImage);
+        card.appendChild(cardText);
+
+        return card;
+    }
+
+    const renderCallToActionCards = () => {
+        const cards = document.querySelector('.cta-cards');
+        
+        const vegetables = products.filter((item) => item.category === 'vegetables');
+
+        for (let i = 0; i < vegetables.length; i ++) {
+            const card = createCallToActionCard(vegetables[i]);
+            cards.appendChild(card);
+        }
+    }
+
+    const slideCallToActionCards = () => {
+        let callToActionCard = document.querySelectorAll('.cta-card');
+
+        // three cards width including each of their margin right
+        let movePer = (callToActionCard[0].offsetWidth + 20) * 3;
+
+        // slide three cards in every 3 seconds
+        let newArrival = setInterval(() => {
+            if (movePer >= ((callToActionCard[0].offsetWidth + 20) * callToActionCard.length)) {
+                movePer = 0;
+            }
+
+            for (let i = 0; i < callToActionCard.length; i++) {
+                callToActionCard[i].style.transform = `translateX(-${movePer}px)`;
+            }
+
+            movePer += (callToActionCard[0].offsetWidth + 20) * 3;
+
+        }, 3000);
+    }
+
+    renderCallToActionCards();
+    slideCallToActionCards();
 })();
 
 
