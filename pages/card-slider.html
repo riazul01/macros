@@ -10,12 +10,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Square&display=swap" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: monospace;
+            font-family: 'Nova Square', sans-serif;
         }
 
         .container {
@@ -26,6 +31,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/bg-images/card-slider-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             overflow: hidden;
         }
 
@@ -49,35 +58,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px dashed #222;
             border-radius: 1rem;
             transition: all 0.4s ease;
-        }
-
-        .card:nth-child(1) {
-            background: #000;
-        }
-
-        .card:nth-child(2) {
-            background: #111;
-        }
-
-        .card:nth-child(3) {
-            background: #222;
-        }
-
-        .card:nth-child(4) {
-            background: #333;
-        }
-
-        .card:nth-child(5) {
-            background: #444;
         }
 
         .card > h1 {
             position: absolute;
             top: 2rem;
             left: 2rem;
-            color: skyblue;
+            color: #316944;
             font-size: 1.8rem;
         }
 
@@ -113,27 +104,27 @@
         <div class="cards">
             <div class="card">
                 <h1>05</h1>
-                <p>Hover Me!</p>
+                <p>Hover me!</p>
             </div>
 
             <div class="card">
                 <h1>04</h1>
-                <p>Hover Me!</p>
+                <p>Hover me!</p>
             </div>
 
             <div class="card">
                 <h1>03</h1>
-                <p>Hover Me!</p>
+                <p>Hover me!</p>
             </div>
 
             <div class="card">
                 <h1>02</h1>
-                <p>Hover Me!</p>
+                <p>Hover me!</p>
             </div>
 
             <div class="card">
                 <h1>01</h1>
-                <p>Hover Me!</p>
+                <p>Hover me!</p>
             </div>
         </div>
     </div>
@@ -159,7 +150,7 @@
                         cards[i].style.transform = 'none';
                         cards[i].onmouseover = () => null;
                         cards[i].onmouseout = () => null;
-                        cardText[i].innerText = 'Click Me!';
+                        cardText[i].innerText = 'Click me!';
                     }
                 } else if (mode === 'stack') {
                     cardsWrap.style.maxWidth = '600px';
@@ -169,7 +160,7 @@
                         cards[i].style.top = '50%';
                         cards[i].style.left = '50%';
                         cards[i].style.transform = 'translate(-50%, -50%)';
-                        cardText[i].innerText = 'Click Me!';
+                        cardText[i].innerText = 'Click me!';
                     }
                 } else if (mode === 'automate') {
                     cardsWrap.style.maxWidth = '600px';
@@ -179,7 +170,7 @@
                         cards[i].style.left = transforms[i];
                         cards[i].style.transform = `translate(-${transforms[i]}, -${transforms[i]})`;
                         cards[i].style.zIndex = 10 - transforms[i][0];
-                        cardText[i].innerText = 'Hover Me!';
+                        cardText[i].innerText = 'Hover me!';
                     }
                 }
             }
