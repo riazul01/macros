@@ -34,8 +34,10 @@
             align-items: center;
             justify-content: center;
             box-sizing: border-box;
-            background-image: repeating-radial-gradient(circle at center center, transparent 0px, transparent 13px,rgba(255,255,255,0.05) 13px, rgba(255,255,255,0.05) 26px,transparent 26px, transparent 27px,rgba(255,255,255,0.05) 27px, rgba(255,255,255,0.05) 32px,transparent 32px, transparent 34px,rgba(255,255,255,0.05) 34px, rgba(255,255,255,0.05) 36px),repeating-radial-gradient(circle at center center, rgb(0,0,0) 0px, rgb(0,0,0) 1px,rgb(0,0,0) 1px, rgb(0,0,0) 13px,rgb(0,0,0) 13px, rgb(0,0,0) 24px,rgb(0,0,0) 24px, rgb(0,0,0) 37px,rgb(0,0,0) 37px, rgb(0,0,0) 44px,rgb(0,0,0) 44px, rgb(0,0,0) 48px); 
-            background-size: 88px 88px;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/bg-images/accordion-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         .accordion-wrapper {
@@ -51,11 +53,11 @@
         .header {
             position: relative;
             padding: 1.2rem;
-            color: #222;
+            color: #ddd;
             font-size: 1.2rem;
             font-weight: 700;
             cursor: pointer;
-            background: #fff;
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 1rem;
         }
 
@@ -74,11 +76,11 @@
 
         .text {
             margin: 0.6rem 0;
-            color: #222;
+            color: #ddd;
             font-size: 1.1rem;
             text-align: justify;
-            background: #fff;
-            border-left: 7px solid #459122;
+            background: rgba(0, 0, 0, 0.7);
+            border-left: 7px solid #dc4701;
             border-radius: 1rem;
             overflow: hidden;
             padding: 0 1.4rem;
@@ -106,62 +108,42 @@
         <div class="accordion-wrapper">
             <div class="accrodion">
                 <p class="header">
-                    <span>01. Lorem ipsum dolor sit amet consectetur adipisicing labore?</span>
+                    <span>01. What amenities are available in the rooms?</span>
                     <span class="icon-angle-right icon"></span>
                 </p>
-                <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione dolor
-                    aliquam tempora exceptu quo voluptak aperiam omnis illum. Illo laudantium aliquam
-                    accusantium tenetur corporis cumque quos eaque voluptatibus dignissimos vitae
-                    blanditiis officiis animi incidunt explicabo placeat quisquam necessitatibus architecto.
-                </p>
+                <p class="text">Our rooms are equipped with a range of amenities, including comfortable beds, modern furnishings, flat-screen TVs, high-speed Wi-Fi, and well-appointed bathrooms. Additional amenities may vary depending on the room type.</p>
             </div>
 
             <div class="accrodion">
                 <p class="header">
-                    <span>02. Lorem ipsum dolor sit amet consectetur adipisicing labore?</span>
+                    <span>02. Is there Wi-Fi available in the hotel?</span>
                     <span class="icon-angle-right icon"></span>
                 </p>
-                <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione dolor
-                    aliquam tempora exceptu quo voluptak aperiam omnis illum. Illo laudantium aliquam
-                    accusantium tenetur corporis cumque quos eaque voluptatibus dignissimos vitae
-                    blanditiis officiis animi incidunt explicabo placeat quisquam necessitatibus architecto.
-                </p>
+                <p class="text">Yes, complimentary high-speed Wi-Fi is available throughout the hotel, ensuring that you can stay connected during your stay.</p>
             </div>
 
             <div class="accrodion">
                 <p class="header">
-                    <span>03. Lorem ipsum dolor sit amet consectetur adipisicing labore?</span>
+                    <span>03. Are there on-site dining options?</span>
                     <span class="icon-angle-right icon"></span>
                 </p>
-                <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione dolor
-                    aliquam tempora exceptu quo voluptak aperiam omnis illum. Illo laudantium aliquam
-                    accusantium tenetur corporis cumque quos eaque voluptatibus dignissimos vitae
-                    blanditiis officiis animi incidunt explicabo placeat quisquam necessitatibus architecto.
-                </p>
+                <p class="text">Our hotel offers on-site dining facilities, including [insert restaurant names/types], serving a diverse range of culinary delights. Guests can also enjoy room service for added convenience.</p>
             </div>
 
             <div class="accrodion">
                 <p class="header">
-                    <span>04. Lorem ipsum dolor sit amet consectetur adipisicing labore?</span>
+                    <span>04. What business facilities are available for corporate guests?</span>
                     <span class="icon-angle-right icon"></span>
                 </p>
-                <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione dolor
-                    aliquam tempora exceptu quo voluptak aperiam omnis illum. Illo laudantium aliquam
-                    accusantium tenetur corporis cumque quos eaque voluptatibus dignissimos vitae
-                    blanditiis officiis animi incidunt explicabo placeat quisquam necessitatibus architecto.
-                </p>
+                <p class="text">For our corporate guests, we provide meeting rooms, conference facilities, and business services to accommodate various business needs. Please contact our front desk for specific arrangements.</p>
             </div>
 
             <div class="accrodion">
                 <p class="header">
-                    <span>05. Lorem ipsum dolor sit amet consectetur adipisicing labore?</span>
+                    <span>05. Do you provide shuttle services to and from the airport?</span>
                     <span class="icon-angle-right icon"></span>
                 </p>
-                <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione dolor
-                    aliquam tempora exceptu quo voluptak aperiam omnis illum. Illo laudantium aliquam
-                    accusantium tenetur corporis cumque quos eaque voluptatibus dignissimos vitae
-                    blanditiis officiis animi incidunt explicabo placeat quisquam necessitatibus architecto.
-                </p>
+                <p class="text">We offer [optional] shuttle services for the convenience of our guests. Please check with our concierge or reservation desk for availability and scheduling.</p>
             </div>
         </div>
     </div>
