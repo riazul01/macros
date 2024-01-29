@@ -300,6 +300,7 @@ body {
     color: #fff;
     font-size: 1rem;
     border-radius: 1.4rem;
+    text-shadow: 0.1rem 0.1rem 0.2rem #111;
     box-shadow: 0.1rem 0.1rem 0.2rem #222;
 }
 
