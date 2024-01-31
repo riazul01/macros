@@ -13,8 +13,7 @@
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -40,6 +39,7 @@
             height: 500px;
             width: 100%;
             max-width: 320px;
+            background: #222;
             border: 2px dashed #333;
             border-radius: 1rem;
             transition: all 0.3s ease;
@@ -79,37 +79,37 @@
         let dragItem = null;
 
         for (let i of dragItems) {
-            i.addEventListener('dragstart', function () {
-                dragItem = this;
+            i.addEventListener('dragstart', (e) => {
+                dragItem = e.target;
                 setTimeout(() => {
-                    this.style.display = 'none';
+                    i.style.display = 'none';
                 }, 0);
             });
 
-            i.addEventListener('dragend', function () {
+            i.addEventListener('dragend', () => {
                 setTimeout(() => {
-                    this.style.display = 'block';
+                    i.style.display = 'block';
                     dragItem = null;
                 }, 0);
             });
         }
 
         for (let i of boxes) {
-            i.addEventListener('drop', function () {
-                this.append(dragItem);
+            i.addEventListener('drop', () => {
+                i.append(dragItem);
             });
 
-            i.addEventListener('dragover', function (e) {
+            i.addEventListener('dragover', (e) => {
                 e.preventDefault();
-                this.style.border = "2px dashed slateblue";
+                i.style.border = "2px dashed slateblue";
             });
 
-            i.addEventListener('dragenter', function (e) {
+            i.addEventListener('dragenter', (e) => {
                 e.preventDefault();
             });
 
-            i.addEventListener('dragleave', function () {
-                this.style.border = "2px dashed #333";
+            i.addEventListener('dragleave', () => {
+                i.style.border = "2px dashed #333";
             });
         }
     </script>
