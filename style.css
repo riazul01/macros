@@ -56,7 +56,6 @@ body {
 }
 
 .header > a {
-    /* color: seagreen; */
     font-size: 2.4rem;
     font-weight: bold;
     text-decoration: none;
@@ -243,7 +242,6 @@ body {
 
 /* projects start */
 .projects {
-    margin-bottom: 3rem;
     width: 100%;
     height: auto;
     display: grid;
@@ -331,30 +329,23 @@ body {
 
 /* footer start */
 footer {
+    margin: 5rem 0 3rem 0;
     width: 100%;
-    height: 70px;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top-left-radius: 1.2rem;
-    border-top-right-radius: 1.2rem;
-    border: 1px solid #000;
-    border-bottom: 0;
-    background: #111;
 }
 
 footer p {
-    color: #fff;
+    color: #333;
     font-size: 1.2rem;
     text-shadow: 0.1rem 0.1rem 0.2rem #111;
 }
 
 footer p a {
-    color: skyblue;
-    text-decoration: none;
-    background-image: repeating-linear-gradient(135deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(45deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(67.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(135deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(45deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(112.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(112.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(45deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(22.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(45deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(22.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(135deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(157.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(67.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(67.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),linear-gradient(90deg, rgb(151, 26, 210),rgb(57, 199, 205));    
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #333;
+    text-decoration: underline;
 }
 /* footer end */
 
