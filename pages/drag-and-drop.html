@@ -74,13 +74,13 @@
     </div>
 
     <script>
-        let dragItems = document.querySelectorAll('.box > p');
         let boxes = document.querySelectorAll('.box');
-        let dragItem = null;
+        let boxItems = document.querySelectorAll('.box > p');
+        let draggedItem = null;
 
-        for (let i of dragItems) {
+        for (let i of boxItems) {
             i.addEventListener('dragstart', (e) => {
-                dragItem = e.target;
+                draggedItem = e.target;
                 setTimeout(() => {
                     i.style.display = 'none';
                 }, 0);
@@ -89,14 +89,14 @@
             i.addEventListener('dragend', () => {
                 setTimeout(() => {
                     i.style.display = 'block';
-                    dragItem = null;
+                    draggedItem = null;
                 }, 0);
             });
         }
 
         for (let i of boxes) {
             i.addEventListener('drop', () => {
-                i.append(dragItem);
+                i.append(draggedItem);
             });
 
             i.addEventListener('dragover', (e) => {
