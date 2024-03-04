@@ -119,6 +119,7 @@
         .contact-form {
             display: flex;
             flex-direction: column;
+            gap: 1.2rem;
             width: 60%;
             height: auto;
             padding: 0 3rem;
@@ -128,18 +129,10 @@
         .contact-form .name-field {
             display: flex;
             justify-content: space-between;
+            gap: 1.2rem;
         }
 
-        .name-field .input-area {
-            width: 48%;
-        }
-
-        .contact-form .input-area {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .input-area input {
+        input {
             height: 3rem;
             width: 100%;
             color: #333;
@@ -154,32 +147,13 @@
             transition: all 0.3s ease;
         }
 
-        .input-area label {
-            position: absolute;
-            top: 50%;
-            left: 1rem;
-            transform: translateY(-50%);
-            color: #333;
-            font-size: 1.2rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
+        .name-field input {
+            width: 50%;
         }
 
-        .input-area input:focus~label,
-        .input-area input:valid~label {
-            top: -0.8rem;
-            left: 0;
-        }
-
-        .contact-form .message-area {
-            position: relative;
+        textarea {
             flex: 1 1 auto;
             height: 200px;
-            width: 100%;
-        }
-
-        .message-area textarea {
-            height: 100%;
             width: 100%;
             border: 2px solid #fff;
             outline: none;
@@ -194,24 +168,8 @@
             transition: all 0.3s ease;
         }
 
-        .message-area label {
-            position: absolute;
-            color: #333;
-            font-weight: 500;
-            font-size: 1.2rem;
-            top: 1rem;
-            left: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .message-area textarea:focus~label,
-        .message-area textarea:valid~label {
-            top: -1.6rem;
-            left: 0;
-        }
-
         .contact-form .btn {
-            margin-top: 1.8rem;
+            margin-top: 1rem;
         }
 
         .contact-form .btn button {
@@ -314,27 +272,11 @@
 
                 <form class="contact-form">
                     <div class="name-field">
-                        <div class="input-area">
-                            <input type="text" id="fname" autocomplete="off" required>
-                            <label for="fname">First Name</label>
-                        </div>
-
-                        <div class="input-area">
-                            <input type="text" id="lname" autocomplete="off" required>
-                            <label for="lname">Last Name</label>
-                        </div>
+                        <input type="text" placeholder="First Name" autocomplete="off" required>
+                        <input type="text" placeholder="Last Name" autocomplete="off" required>
                     </div>
-
-                    <div class="input-area">
-                        <input type="email" id="email" autocomplete="off" required>
-                        <label for="email">Email</label>
-                    </div>
-
-                    <div class="message-area">
-                        <textarea id="message" required></textarea>
-                        <label for="message">Message</label>
-                    </div>
-
+                    <input type="email" placeholder="Email" autocomplete="off" required>
+                    <textarea type="text" placeholder="Message" required></textarea>
                     <div class="btn">
                         <button type="submit">Send</button>
                     </div>
