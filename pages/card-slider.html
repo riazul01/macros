@@ -43,10 +43,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/bg-images/card-slider-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background: #1f2328;
             overflow: hidden;
         }
 
@@ -65,28 +62,65 @@
 
         .card {
             position: absolute;
-            height: 420px;
+            height: 320px;
             width: 320px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px dashed #222;
+            cursor: pointer;
             border-radius: 1rem;
             transition: all 0.4s ease;
+            box-shadow: 0.2rem 0.2rem 0.6rem #111;
+        }
+
+        .card:nth-child(5) {
+            background: seagreen;
+        }
+
+        .card:nth-child(4) {
+            background: tomato;
+        }
+
+        .card:nth-child(3) {
+            background: yellowgreen;
+        }
+
+        .card:nth-child(2) {
+            background: steelblue;
+        }
+
+        .card:nth-child(1) {
+            background: slateblue;
         }
 
         .card > h1 {
             position: absolute;
             top: 2rem;
             left: 2rem;
-            color: #316944;
+            color: #fff;
             font-size: 1.8rem;
+            text-shadow: 0.1rem 0.1rem 0.2rem #111;
         }
 
         .card > p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             color: #fff;
             font-size: 1.3rem;
+            text-shadow: 0.1rem 0.1rem 0.2rem #111;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+
+        .card > p.activeHover,
+        .card > p.activeClick {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
 
         @media screen and (max-width: 1080px) {
@@ -116,27 +150,32 @@
         <div class="cards">
             <div class="card">
                 <h1>05</h1>
-                <p>Hover me!</p>
+                <p class="hoverText activeHover">Hover me!</p>
+                <p class="clickText activeClick">Click me!</p>
             </div>
 
             <div class="card">
                 <h1>04</h1>
-                <p>Hover me!</p>
+                <p class="hoverText activeHover">Hover me!</p>
+                <p class="clickText activeClick">Click me!</p>
             </div>
 
             <div class="card">
                 <h1>03</h1>
-                <p>Hover me!</p>
+                <p class="hoverText activeHover">Hover me!</p>
+                <p class="clickText activeClick">Click me!</p>
             </div>
 
             <div class="card">
                 <h1>02</h1>
-                <p>Hover me!</p>
+                <p class="hoverText activeHover">Hover me!</p>
+                <p class="clickText activeClick">Click me!</p>
             </div>
 
             <div class="card">
                 <h1>01</h1>
-                <p>Hover me!</p>
+                <p class="hoverText activeHover">Hover me!</p>
+                <p class="clickText activeClick">Click me!</p>
             </div>
         </div>
     </div>
@@ -144,8 +183,9 @@
     <script>
         (function() {
             const cardsWrap = document.querySelector('.cards');
-            const cardText = document.querySelectorAll('.card > p');
             const cards = document.querySelectorAll('.card');
+            const hoverText = document.querySelectorAll('.hoverText');
+            const clickText = document.querySelectorAll('.clickText');
             const transforms = ['70%', '60%', '50%', '40%', '30%'];
             let cardIntervalId = null;
             let spreadMode = false;
@@ -162,7 +202,8 @@
                         cards[i].style.transform = 'none';
                         cards[i].onmouseover = () => null;
                         cards[i].onmouseout = () => null;
-                        cardText[i].innerText = 'Click me!';
+                        clickText[i].classList.add('activeClick');
+                        hoverText[i].classList.remove('activeHover');
                     }
                 } else if (mode === 'stack') {
                     cardsWrap.style.maxWidth = '600px';
@@ -172,7 +213,8 @@
                         cards[i].style.top = '50%';
                         cards[i].style.left = '50%';
                         cards[i].style.transform = 'translate(-50%, -50%)';
-                        cardText[i].innerText = 'Click me!';
+                        clickText[i].classList.add('activeClick');
+                        hoverText[i].classList.remove('activeHover');
                     }
                 } else if (mode === 'automate') {
                     cardsWrap.style.maxWidth = '600px';
@@ -182,7 +224,8 @@
                         cards[i].style.left = transforms[i];
                         cards[i].style.transform = `translate(-${transforms[i]}, -${transforms[i]})`;
                         cards[i].style.zIndex = 10 - transforms[i][0];
-                        cardText[i].innerText = 'Hover me!';
+                        hoverText[i].classList.add('activeHover');
+                        clickText[i].classList.remove('activeClick');
                     }
                 }
             }
