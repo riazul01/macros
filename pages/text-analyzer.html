@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!-- 
+    Project name: Text Analyzer
+    Author: Md. Riazul Islam
+    Author URI: https://github.com/riazul01
+-------------------------------------------->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Source Code Pro", monospace;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            background: #111;
+        }
+
+        .textAnalyzer {
+            padding: 3rem 0.4rem;
+            width: 100%;
+            max-width: 820px;
+            height: auto;
+        }
+
+        .title h1 {
+            padding: 1rem 0;
+            color: #eee;
+            font-size: 2.2rem;
+        }
+
+        .textField {
+            height: 200px;
+            width: 100%;
+        }
+
+        textarea {
+            padding: 1rem;
+            color: #eee;
+            font-size: 1.2rem;
+            height: 100%;
+            width: 100%;
+            background: rgba(35, 35, 35, 0.3);
+            backdrop-filter: blur(5px);
+            border: 1px solid #222;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .buttonField {
+            padding: 1rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .buttonField button {
+            padding: 0.3rem 0.6rem;
+            color: #fff;
+            font-size: 1.1rem;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            text-shadow: 0.1rem 0.1rem 0.4rem #222;
+            box-shadow: 0.1rem 0.1rem 0.2rem #222;
+            background: olivedrab;
+            border: 1px solid #5e8411;
+            transition: all 0.3s ease;
+        }
+
+        .buttonField button:hover {
+            background: #5e8411;
+        }
+
+        .textSummary {
+            padding: 0.4rem 0.6rem;
+            color: #eee;
+            font-size: 1.4rem;
+            background: #333;
+            box-shadow: 0.1rem 0.1rem 0.2rem #111;
+            display: inline-block;
+        }
+
+        @media screen and (max-width: 460px) {
+            .textAnalyzer {
+                padding-top: 1rem;
+            }
+
+            .title h1 {
+                font-size: 1.8rem;
+            }
+
+            .buttonField {
+                padding: 1.5rem 0 1rem 0;
+            }
+
+            button {
+                font-size: 1rem;
+            }
+
+            .textSummary {
+                font-size: 1.1rem;
+                width: 100%;
+            }
+        }
+    </style>
+
+    <title>Text Analyzer</title>
+</head>
+
+<body>
+    <div class="textAnalyzer">
+        <div class="title">
+            <h1>Text Analyzer</h1>
+        </div>
+        <div class="textField">
+            <textarea name="text-box" placeholder="Insert your text here..."></textarea>
+        </div>
+        <div class="buttonField">
+            <button onclick="handleUpperCase()">UPPER CASE</button>
+            <button onclick="handleLowerCase()">lower case</button>
+            <button onclick="handleSentenceCase()">Sentence case</button>
+            <button onclick="handleCapitalizedCase()">Capitalized Case</button>
+            <button onclick="handleAlternatingCase()">aLtErNaTiNg cAsE</button>
+            <button onclick="handleInverseCase()">InVeRsE CaSe</button>
+            <button onclick="handleRemoveExtraSpace()">Remove extra space</button>
+            <button onclick="handleReverseCase()">Reverse case</button>
+            <button onclick="handleCopyText()">Copy to clipboard</button>
+            <button onclick="handleClearText()">Clear</button>
+        </div>
+        <div>
+            <p class="textSummary">
+                <strong>Count: </strong>
+                <span id="wordCount">0 Words |</span>
+                <span id="charCount">0 Characters</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const textarea = document.querySelector('textarea');
+        const wordCount = document.querySelector('#wordCount');
+        const charCount = document.querySelector('#charCount');
+
+        textarea.addEventListener('input', (e) => {
+            let text = e.target.value;
+            wordCount.textContent = `${text.split(/[ ]+/).filter((str) => str !== '').length} Words |`;
+            charCount.textContent = `${text.length} Characters`;
+        });
+
+        const handleUpperCase = () => {
+            textarea.value = textarea.value.toUpperCase();
+        }
+
+        const handleLowerCase = () => {
+            textarea.value = textarea.value.toLowerCase();
+        }
+
+        const handleSentenceCase = () => {
+            let text = textarea.value.toLowerCase();
+
+            let newText = text.replace(/(^\s*\w|[.!?]\s*\w)/g, (ch) => {
+                return ch.toUpperCase();
+            });
+
+            textarea.value = newText;
+        }
+
+        const handleCapitalizedCase = () => {
+            let text = textarea.value.toLowerCase();
+            let ara = text.split(' ');
+
+            let newAra = ara.map((str) => {
+                if (str !== '') {
+                    let tempAra = str.split('');
+                    tempAra[0] = tempAra[0].toUpperCase();
+                    return tempAra.join('');
+                } else {
+                    return '';
+                }
+            });
+
+            textarea.value = newAra.join(' ');
+        }
+
+        const handleAlternatingCase = () => {
+            let ara = textarea.value.split('');
+
+            for (let i = 0; i < ara.length; i++) {
+                if (i % 2) {
+                    ara[i] = ara[i].toUpperCase();
+                } else {
+                    ara[i] = ara[i].toLowerCase();
+                }
+            }
+
+            textarea.value = ara.join('');
+        }
+
+        const handleInverseCase = () => {
+            let ara = textarea.value.split('');
+
+            for (let i = 0; i < ara.length; i++) {
+                if (ara[i] >= 'A' && ara[i] <= 'Z') {
+                    ara[i] = ara[i].toLowerCase();
+                } else if (ara[i] >= 'a' && ara[i] <= 'z') {
+                    ara[i] = ara[i].toUpperCase();
+                }
+            }
+
+            textarea.value = ara.join('');
+        }
+
+        const handleRemoveExtraSpace = () => {
+            textarea.value = textarea.value.split(/\s+/).join(' ');
+        }
+
+        const handleReverseCase = () => {
+            textarea.value = textarea.value.split('').reverse().join('');
+        }
+
+        const handleCopyText = () => {
+            textarea.select();
+            navigator.clipboard.writeText(textarea.value);
+        }
+
+        const handleClearText = () => {
+            textarea.value = '';
+            wordCount.textContent = '0 Words |';
+            charCount.textContent = '0 Characters';
+        }
+    </script>
+</body>
+
+</html>
