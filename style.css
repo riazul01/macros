@@ -65,13 +65,13 @@ body {
 }
 
 .header > a::before {
-    color: #111;
+    color: transparent;
     position: absolute;
     top: 0;
     left: 0;
     content: 'MACROS';
     -webkit-text-stroke: 2px olivedrab;
-    transform: scale(1.1);
+    transform: scale(1.05, 1.1);
     z-index: -1;
 }
 
@@ -375,7 +375,7 @@ footer > p {
 }
 
 footer > p > a {
-    color: #143f27;
+    color: #394b13;
 }
 
 footer > div {
