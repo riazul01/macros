@@ -17,7 +17,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(45deg, slateblue, skyblue);
+    background: linear-gradient(45deg, #4fc624, greenyellow, orange, orangered);
 }
 
 html {
@@ -61,7 +61,7 @@ body {
     font-size: 2.4rem;
     font-weight: bold;
     text-decoration: none;
-    text-shadow: 0.1rem 0.1rem 0.2rem #111;
+    -webkit-text-stroke: 2px #111;
 }
 
 .header > a::before {
@@ -70,8 +70,10 @@ body {
     top: 0;
     left: 0;
     content: 'MACROS';
-    -webkit-text-stroke: 2px olivedrab;
-    transform: scale(1.05, 1.1);
+    background: linear-gradient(45deg, orangered, #4fc624);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: scale(1.1, 1.15);
     z-index: -1;
 }
 
