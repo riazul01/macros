@@ -379,7 +379,7 @@ footer > p {
 }
 
 footer > p > a {
-    color: #1d4a0d;
+    color: rgba(173, 255, 47, 0.3);
 }
 
 footer > div {
