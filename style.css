@@ -365,8 +365,8 @@ body {
 
 /* footer start */
 footer {
-    padding: 2rem 1rem;
     margin: 0 auto;
+    padding: 2rem 0.4rem;
     max-width: 1300px;
     display: flex;
     align-items: center;
