@@ -370,7 +370,7 @@ body {
 /* footer start */
 footer {
     margin: 0 auto;
-    padding: 2rem 0.4rem;
+    padding: 2rem 0.5rem;
     max-width: 1300px;
     display: flex;
     align-items: center;
@@ -379,7 +379,7 @@ footer {
 
 footer > p {
     color: #333;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     text-shadow: 0.1rem 0.1rem 0.2rem #000;
 }
 
@@ -391,12 +391,12 @@ footer > div {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
+    gap: 0.625rem;
 }
 
 footer > div > a {
     color: #333;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     text-decoration: none;
     text-shadow: 0.1rem 0.1rem 0.2rem #000;
 }
@@ -428,6 +428,6 @@ footer > div > span {
     }
 
     footer > div {
-        gap: 0.4rem;
+        gap: 0.5rem;
     }
 }
